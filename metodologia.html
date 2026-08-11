@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metodologia · Yggdrasil Project</title>
+<meta name="description" content="O porquê de cada método da esteira Yggdrasil: KS, AUC/Gini, shifts DES→OOT, ratings monotônicos, WoE/IV, PSI/CSI, SHAP e o veredito automático de EDA.">
+<meta name="theme-color" content="#08080a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌳%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="index.html">
+      <svg class="brand__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M12 22V9"/><path d="M12 9 6 4"/><path d="m12 9 6-5"/><path d="M12 14 7 11"/><path d="m12 14 5-3"/>
+        <path d="M12 22 8 24"/><path d="m12 22 4 2"/>
+      </svg>
+      <span class="brand__txt">Yggdra<span>sil</span></span>
+    </a>
+    <div class="nav__links" data-navlinks>
+      <a href="index.html#raizes">Raízes</a>
+      <a href="index.html#ramos">Módulos</a>
+      <a href="index.html#interface">Interface</a>
+      <a href="index.html#galeria">Galeria</a>
+      <a href="tutoriais.html">Tutoriais</a>
+      <a href="metodologia.html">Metodologia</a>
+      <a href="index.html#mundos">Temas</a>
+      <a href="https://github.com/richardguilhermeds/Yggdrasil-Project" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://pypi.org/project/yggdrasil-project/" target="_blank" rel="noopener">PyPI ↗</a>
+    </div>
+    <div class="nav__cta">
+      <a class="btn" href="https://github.com/richardguilhermeds/Yggdrasil-Project" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--solid" href="index.html#instalacao">Instalar</a>
+      <button class="nav__burger" data-burger aria-label="Abrir menu" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow"><span class="rune" aria-hidden="true">ᚢ</span> Poço de Urðr · das normas e do destino</p>
+    <h1>Metodologia</h1>
+    <p class="lede">
+      O <i>porquê</i> de cada método da esteira: fórmula, como é computado no código e, sobretudo,
+      as armadilhas. Escrito para quem precisa <b>auditar e defender</b> escolhas metodológicas
+      perante validação independente e governança.
+    </p>
+    <div class="hero__actions" style="margin-top:24px">
+      <a class="btn btn--solid" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/docs/metodologia.md" target="_blank" rel="noopener">Documento completo ↗</a>
+      <a class="btn" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/docs/credit-risk/tree-segmenter.md" target="_blank" rel="noopener">Doc do TreeSegmenter ↗</a>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap doc">
+
+    <aside class="toc">
+      <h4>Nesta página</h4>
+      <a href="#contrato">O contrato de amostras</a>
+      <a href="#c1">1 · Métricas e shifts</a>
+      <a class="sub" href="#c1">KS, AUC/Gini, Brier</a>
+      <a class="sub" href="#c1">Regressão e shifts</a>
+      <a href="#c2">2 · Ratings monotônicos</a>
+      <a class="sub" href="#c2">Quatro metodologias</a>
+      <a class="sub" href="#c2">WoE e IV</a>
+      <a href="#c3">3 · Estabilidade (PSI/CSI)</a>
+      <a href="#c4">4 · SHAP e EDA</a>
+      <a href="#leitura">Como ler o documento</a>
+      <h4 style="margin-top:24px">Atalhos</h4>
+      <a href="tutoriais.html">Tutoriais</a>
+      <a href="index.html#ramos">Módulos</a>
+    </aside>
+
+    <div class="prose">
+
+      <h2 id="contrato">O contrato de amostras</h2>
+      <p>
+        Toda a esteira gira em torno de uma convenção. A base de <strong>desenvolvimento (DES)</strong>
+        é a fotografia sobre a qual todos os cortes, cutoffs e referências de estabilidade são
+        <strong>aprendidos e congelados</strong>. A base <strong>out-of-time (OOT)</strong> é uma janela
+        temporal posterior, usada para testar generalização. Safras de produção são monitoradas
+        continuamente <em>contra a referência DES</em>, nunca contra si mesmas.
+      </p>
+      <p>
+        A convenção de alvo é fixa: <code>y = 1</code> denota o evento de interesse (o "mau",
+        inadimplência ou <i>default</i>) e <code>y = 0</code> o "bom". Métricas de regressão aplicam-se
+        a alvos contínuos como LGD e EAD.
+      </p>
+      <blockquote>
+        Amostras <code>SIMUL</code> e <code>BACKTEST</code> são <i>scoring-only</i>: recebem predição e
+        grupo homogêneo, mas não entram na aprendizagem de nenhum corte.
+      </blockquote>
+
+      <h2 id="c1">1 · Métricas de discriminação, erro e shifts</h2>
+      <p>
+        O fio condutor é simples: separar quem é bom de quem é mau (<b>discriminação</b>), errar pouco
+        na magnitude prevista (<b>erro</b>) e garantir que o desempenho do desenvolvimento se sustente
+        fora da janela de treino (<b>shifts</b>).
+      </p>
+
+      <h3>Discriminação</h3>
+      <div class="scroll-x">
+      <table>
+        <tr><th>métrica</th><th>o que mede</th><th>armadilha principal</th></tr>
+        <tr><td><code>KS</code></td><td>Máxima distância entre as CDFs do score de bons e maus.</td><td>Mede a separação em <b>um único ponto</b> da curva. KS &gt; 0,75 quase sempre é <i>leakage</i>, não talento.</td></tr>
+        <tr><td><code>AUC</code> / <code>Gini</code></td><td>Probabilidade de um mau receber score maior que um bom, na curva inteira.</td><td>Insensível a calibração: um modelo pode ordenar bem e prever níveis errados.</td></tr>
+        <tr><td><code>Brier</code></td><td>Erro quadrático médio da probabilidade prevista.</td><td>Mistura discriminação e calibração num número só, então decomponha antes de concluir.</td></tr>
+        <tr><td><code>Log loss</code></td><td>Entropia cruzada binária.</td><td>Penaliza confiança errada de forma ilimitada; sensível a poucos casos extremos.</td></tr>
+        <tr><td><code>Cutoff KS-ótimo</code></td><td>Ponto de corte no score onde o KS é atingido.</td><td>É ótimo <b>estatisticamente</b>, não economicamente. Aprenda em DES e congele.</td></tr>
+      </table>
+      </div>
+
+      <h3>Faixas orientativas de KS</h3>
+      <div class="scroll-x">
+      <table>
+        <tr><th>faixa</th><th>leitura</th></tr>
+        <tr><td><code>&lt; 0,20</code></td><td>discriminação fraca</td></tr>
+        <tr><td><code>0,20 a 0,40</code></td><td>aceitável a bom</td></tr>
+        <tr><td><code>&gt; 0,40</code></td><td>forte</td></tr>
+        <tr><td><code>&gt; 0,75</code></td><td>suspeito de <i>leakage</i> ou vazamento de tempo</td></tr>
+      </table>
+      </div>
+
+      <h3>Erro e shifts</h3>
+      <p>
+        Para alvos contínuos a esteira reporta <code>RMSE</code>, <code>MAE</code>, <code>MAPE</code>
+        robusto, <code>sMAPE</code>, <code>MedAE</code>, <code>R²</code> e viés. Em cima de tudo isso,
+        os <strong>shifts DES → OOT</strong> de cada métrica, em valor absoluto e relativo: é o shift,
+        e não o nível, que revela se o modelo generaliza.
+      </p>
+
+      <h2 id="c2">2 · Grupos homogêneos e binning monotônico</h2>
+      <p>
+        Em crédito, um escore contínuo raramente é o produto final, porque a decisão opera sobre
+        <b>faixas</b>. A exigência central é a <strong>monotonicidade</strong>: se o rating A é melhor
+        que o B, a taxa de evento observada em A tem de ser menor. Faixa não monotônica é rejeitada em
+        validação independente, por melhor que seja o AUC.
+      </p>
+
+      <h3>Quatro metodologias, mesma interface</h3>
+      <div class="scroll-x">
+      <table>
+        <tr><th>metodologia</th><th>como funciona</th><th>quando usar</th></tr>
+        <tr><td><code>decis</code></td><td>Dez faixas de igual população, aprendidas em DES.</td><td>Referência simples e auditável. O ponto de partida.</td></tr>
+        <tr><td><code>quantil</code></td><td>Quantis finos + fusão monotônica por inversão (Mann-Whitney).</td><td>Quando os decis quebram a monotonicidade nas pontas.</td></tr>
+        <tr><td><code>arvore</code></td><td><code>DecisionTree</code> sobre o score, cortes por ganho.</td><td>Quando o risco muda em degraus e não suavemente.</td></tr>
+        <tr><td><code>optbin</code></td><td>OptBinning com restrição de monotonicidade embutida.</td><td>Quando você quer o ótimo sob restrição, sem ajuste manual.</td></tr>
+      </table>
+      </div>
+
+      <h3>WoE e IV</h3>
+      <p>
+        O <b>Weight of Evidence</b> converte cada bin no logaritmo da razão entre a proporção de bons e
+        a de maus; o <b>Information Value</b> soma essa evidência ponderada ao longo dos bins, na escala
+        de Siddiqi. A esteira também aplica IV contínuo em problemas de regressão.
+      </p>
+      <p>
+        O relatório por grupo (<code>group_report</code>) fecha o capítulo com média prevista versus
+        observada, representatividade e o teste de monotonicidade (<code>is_monotonic</code>), o
+        conjunto mínimo que uma área de validação vai pedir.
+      </p>
+
+      <h2 id="c3">3 · Estabilidade e monitoramento no tempo</h2>
+      <p>
+        O <strong>PSI</strong> (Population Stability Index) compara a distribuição de uma safra contra
+        a referência congelada em DES. O <strong>CSI</strong> decompõe esse PSI por bin, mostrando
+        <i>onde</i> a população se moveu.
+      </p>
+      <div class="scroll-x">
+      <table>
+        <tr><th>PSI</th><th>leitura convencional</th></tr>
+        <tr><td><code>&lt; 0,10</code></td><td>estável</td></tr>
+        <tr><td><code>0,10 a 0,25</code></td><td>deslocamento moderado, investigar</td></tr>
+        <tr><td><code>&gt; 0,25</code></td><td>deslocamento severo, revisar o modelo</td></tr>
+      </table>
+      </div>
+      <p>
+        Duas distinções importam. Primeiro, <b>PSI de escore não é PSI de feature</b>: o escore pode
+        ficar estável enquanto duas variáveis se movem em direções opostas e se cancelam. Segundo,
+        <b>missing por safra</b> merece série própria, porque uma quebra de ingestão aparece ali antes de
+        aparecer em qualquer métrica de performance.
+      </p>
+
+      <h2 id="c4">4 · Interpretabilidade e EDA de features</h2>
+      <p>
+        O SHAP atribui a cada variável a sua contribuição marginal média para a predição, sobre todas
+        as ordens possíveis de entrada, os valores de Shapley da teoria dos jogos cooperativos. A
+        esteira registra a importância global por <code>|SHAP|</code> médio e o gráfico
+        <i>beeswarm</i>, que mostra também a <b>direção</b> do efeito.
+      </p>
+
+      <h3>O que a EDA calcula por feature</h3>
+      <ul>
+        <li><b>Missing</b> global e por safra, com detecção de quebras.</li>
+        <li><b>Percentis</b> e <i>drift</i> de distribuição ao longo do tempo.</li>
+        <li><b>WoE/IV</b> univariado e relação com o alvo.</li>
+        <li><b>Importância univariada vs. multivariada</b>: a distância entre as duas denuncia redundância.</li>
+        <li><b>Leakage</b>: sinal alto demais, cedo demais.</li>
+        <li><b>Estabilidade</b> (PSI/CSI por feature) e <b>monotonicidade</b>.</li>
+        <li><b>Correlação, VIF e redundância</b> entre candidatas.</li>
+      </ul>
+
+      <h3>O veredito automático</h3>
+      <p>
+        Tudo isso é consolidado no <code>feature_profile</code>, uma linha por feature, com um
+        veredito de <b>manter</b>, <b>revisar</b> ou <b>descartar</b>. O veredito é uma
+        <i>recomendação</i> com as flags que o originaram, não um decreto: a decisão final continua
+        sendo do modelador, que precisa justificá-la.
+      </p>
+
+      <h2 id="leitura">Como ler o documento completo</h2>
+      <p>
+        Esta página é um mapa. O documento em <code>docs/metodologia.md</code> traz, para cada método,
+        quatro blocos fixos: <b>o que mede</b>, <b>a fórmula</b> em LaTeX, <b>como o yggdrasil computa</b>
+        (com a função real e o arquivo onde ela vive) e as <b>armadilhas</b>. São cinco capítulos e
+        cerca de quarenta subseções, mais as referências.
+      </p>
+
+      <div class="hero__actions" style="margin-top:26px">
+        <a class="btn btn--solid" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/docs/metodologia.md" target="_blank" rel="noopener">Ler docs/metodologia.md ↗</a>
+        <a class="btn" href="tutoriais.html">Ver na prática, nos tutoriais</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__bot" style="margin-top:0;padding-top:0;border-top:0">
+      <span>© 2026 Richard Guilherme · MIT · <a href="index.html" style="color:var(--accent)">Yggdrasil Project</a></span>
+      <span class="mono" style="letter-spacing:.14em">ᚤ ᚷ ᚷ ᛞ ᚱ ᚨ ᛊ ᛁ ᛚ</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

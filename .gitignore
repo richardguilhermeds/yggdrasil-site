@@ -1,0 +1,4 @@
+﻿# ambiente local
+.DS_Store
+Thumbs.db
+__pycache__/

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tutoriais · Yggdrasil Project</title>
+<meta name="description" content="Doze notebooks passo a passo do Yggdrasil Project: esteira de ML, EDA, seleção em PySpark, segmentadores, capital econômico e modelos econométricos satélite.">
+<meta name="theme-color" content="#08080a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌳%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="index.html">
+      <svg class="brand__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M12 22V9"/><path d="M12 9 6 4"/><path d="m12 9 6-5"/><path d="M12 14 7 11"/><path d="m12 14 5-3"/>
+        <path d="M12 22 8 24"/><path d="m12 22 4 2"/>
+      </svg>
+      <span class="brand__txt">Yggdra<span>sil</span></span>
+    </a>
+    <div class="nav__links" data-navlinks>
+      <a href="index.html#raizes">Raízes</a>
+      <a href="index.html#ramos">Módulos</a>
+      <a href="index.html#interface">Interface</a>
+      <a href="index.html#galeria">Galeria</a>
+      <a href="tutoriais.html">Tutoriais</a>
+      <a href="metodologia.html">Metodologia</a>
+      <a href="index.html#mundos">Temas</a>
+      <a href="https://github.com/richardguilhermeds/Yggdrasil-Project" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://pypi.org/project/yggdrasil-project/" target="_blank" rel="noopener">PyPI ↗</a>
+    </div>
+    <div class="nav__cta">
+      <a class="btn" href="https://github.com/richardguilhermeds/Yggdrasil-Project" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--solid" href="index.html#instalacao">Instalar</a>
+      <button class="nav__burger" data-burger aria-label="Abrir menu" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow"><span class="rune" aria-hidden="true">ᚻ</span> Hvergelmir · de onde brotam os rios</p>
+    <h1>Tutoriais</h1>
+    <p class="lede">
+      Doze notebooks passo a passo em <code>notebooks/tutoriais/</code>, prontos para Jupyter e
+      Databricks, com dados sintéticos embutidos. A lógica de produção nunca mora aqui: ela vive em
+      <code>yggdrasil/</code>. Estes cadernos existem para mostrar <i>como usar</i>.
+    </p>
+    <div class="hero__chips" style="margin-top:22px">
+      <span class="chip chip--accent"><span class="dot"></span>12 notebooks</span>
+      <span class="chip">Jupyter · Databricks</span>
+      <span class="chip">dados sintéticos</span>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap doc">
+
+    <aside class="toc">
+      <h4>Trilhas</h4>
+      <a href="#trilha-1">1 · Primeiros passos</a>
+      <a href="#trilha-2">2 · Features</a>
+      <a href="#trilha-3">3 · Segmentadores</a>
+      <a href="#trilha-4">4 · Risco de carteira</a>
+      <h4 style="margin-top:24px">Atalhos</h4>
+      <a href="metodologia.html">Metodologia</a>
+      <a href="index.html#instalacao">Instalação</a>
+      <a href="https://github.com/richardguilhermeds/Yggdrasil-Project/tree/main/notebooks/tutoriais" target="_blank" rel="noopener">Pasta no GitHub ↗</a>
+    </aside>
+
+    <div class="prose">
+
+      <h2 id="trilha-1">1 · Primeiros passos</h2>
+      <p>
+        Se é a sua primeira vez, comece pelo <b>00</b>: ele percorre a esteira inteira em um problema
+        de classificação, do contrato de dados ao relatório por grupo homogêneo. O <b>01</b> repete o
+        percurso com alvo contínuo, e o <b>05</b> resolve o ambiente antes de você abrir as UIs.
+      </p>
+
+      <div class="tuts" style="margin-top:24px">
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/00_tutorial_yggdrasil.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">00</span><span><b class="tut__t">Visão geral (classificação)</b><span class="tut__d">Contrato <code>feat_*</code>/<code>dt_ref</code>/<code>amostra</code>/<code>target</code>, execução da esteira, métricas por amostra, shifts DES→OOT, ratings e SHAP.</span></span></a>
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/01_tutorial_lgd.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">01</span><span><b class="tut__t">Regressão · alvo [0,1] bimodal</b><span class="tut__d">O mesmo percurso com alvo contínuo: RMSE, MAE, MAPE robusto, R² e binning contínuo.</span></span></a>
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/05_tutorial_instalacao_e_interfaces.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">05</span><span><b class="tut__t">Instalação e carregamento das interfaces</b><span class="tut__d">Extras, <code>ipywidgets</code>/<code>anywidget</code> e como subir as UIs local e no Databricks.</span></span></a>
+      </div>
+
+      <h2 id="trilha-2">2 · Features: da exploração à seleção</h2>
+      <p>
+        Antes de qualquer modelo, entender e podar o conjunto de variáveis. O <b>02</b> perfila cada
+        feature e emite um veredito; o <b>03</b> leva a seleção para PySpark, por book; o <b>10</b>
+        formaliza tudo isso como uma esteira de etapas plugáveis com relatório e política.
+      </p>
+
+      <div class="tuts" style="margin-top:24px">
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/02_tutorial_eda_features.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">02</span><span><b class="tut__t">EDA de features</b><span class="tut__d">Missing global e por safra, percentis no tempo, WoE/IV, PSI por feature, VIF, leakage e <code>feature_profile</code> com veredito.</span></span></a>
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/03_tutorial_feature_selection.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">03</span><span><b class="tut__t">Seleção de features (PySpark)</b><span class="tut__d">Funil por book: missing, variância, importância RF com IV/KS/AUC, redundância, Boruta e consenso.</span></span></a>
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/10_tutorial_selecao_variaveis.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">10</span><span><b class="tut__t">Esteira de seleção de variáveis</b><span class="tut__d">Etapas plugáveis, visualização do funil, relatório consolidado e política de seleção.</span></span></a>
+      </div>
+
+      <h2 id="trilha-3">3 · Segmentadores e a esteira governada</h2>
+      <p>
+        Os dois segmentadores dividem a mesma filosofia: <b>uma classe por família</b>, com
+        classificação e regressão escolhidas por <code>task_type</code>. O <b>04</b> é a régua
+        sequencial em árvore; o <b>06</b> é o construtor orientado a modelo; o <b>07</b> fecha o ciclo
+        registrando tudo no MLflow.
+      </p>
+
+      <div class="tuts" style="margin-top:24px">
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/04_tutorial_tree_segmenter.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">04</span><span><b class="tut__t">Árvore de segmentação unificada</b><span class="tut__d">Binning ótimo ou manual, notas por folha, IV, PSI/CSI, bootstrap, calibração, backtest, <code>to_sql</code> e <code>diff_trees</code>.</span></span></a>
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/06_tutorial_model_segmenter.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">06</span><span><b class="tut__t">Construtor de modelos (UI)</b><span class="tut__d">Univariada com logodds/WoE, seleção, ajuste, fórmula com p-valor, SHAP, ratings e tuning com Optuna.</span></span></a>
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/07_tutorial_esteira_ml_mlflow.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">07</span><span><b class="tut__t">Esteira ML + MLflow</b><span class="tut__d">Experimento, métricas por amostra, shifts, séries de PSI por rating e artefatos de interpretabilidade.</span></span></a>
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/01_tutorial_lgd.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">01</span><span><b class="tut__t">Regressão na prática</b><span class="tut__d">Também vale como referência de <code>task_type="regression"</code> nos dois segmentadores.</span></span></a>
+      </div>
+
+      <h2 id="trilha-4">4 · Risco de carteira: capital e ciclo macro</h2>
+      <p>
+        Os dois eixos que completam o quadro. O <b>08</b> é o eixo de <b>carteira</b>: quanto de
+        capital a instituição precisa para absorver perdas inesperadas. O <b>09</b> e o <b>11</b> são
+        o eixo <b>temporal</b>: como o ciclo macroeconômico desloca o nível das curvas de risco.
+      </p>
+
+      <div class="tuts" style="margin-top:24px">
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/08_tutorial_capital_economico.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">08</span><span><b class="tut__t">Capital econômico</b><span class="tut__d">ASRF/Vasicek analítico, Monte Carlo multifatorial, CreditRisk+, alocação de Euler, RAROC e comparação com Pilar 1.</span></span></a>
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/09_tutorial_modelos_econometricos.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">09</span><span><b class="tut__t">Modelos econométricos satélite</b><span class="tut__d">ARDL, fator Z de Vasicek, diagnóstico completo, champion-challenger e projeção por cenários base/adverso/otimista.</span></span></a>
+        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/11_tutorial_interface_series_temporais.ipynb" target="_blank" rel="noopener">
+          <span class="tut__no">11</span><span><b class="tut__t">Interface de séries temporais</b><span class="tut__d">A <code>SatelliteUI</code> em 7 abas: da estacionariedade ao backtest de cobertura, com projeção em leque e exportação.</span></span></a>
+      </div>
+
+      <h2>Antes de rodar</h2>
+      <ul>
+        <li>Rode a partir da <b>raiz do repositório</b>. O layout é <i>flat</i> e <code>import yggdrasil</code> funciona sem instalar.</li>
+        <li>Localmente, o MLflow 3.x precisa de <code>MLFLOW_ALLOW_FILE_STORE=true</code> para usar <code>./mlruns</code>. Os notebooks já definem isso.</li>
+        <li>Para as UIs interativas, instale o extra <code>[ui]</code>. Sem <code>anywidget</code>, o preview da árvore cai para PNG estático.</li>
+        <li>Os tutoriais <b>03</b> (PySpark) e <b>09</b>/<b>11</b> (satélites) exigem os extras <code>[spark]</code> e <code>[econometric]</code>.</li>
+      </ul>
+
+      <div class="hero__actions" style="margin-top:26px">
+        <a class="btn btn--solid" href="https://github.com/richardguilhermeds/Yggdrasil-Project/tree/main/notebooks/tutoriais" target="_blank" rel="noopener">Abrir a pasta no GitHub ↗</a>
+        <a class="btn" href="metodologia.html">Ler a metodologia</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__bot" style="margin-top:0;padding-top:0;border-top:0">
+      <span>© 2026 Richard Guilherme · MIT · <a href="index.html" style="color:var(--accent)">Yggdrasil Project</a></span>
+      <span class="mono" style="letter-spacing:.14em">ᚤ ᚷ ᚷ ᛞ ᚱ ᚨ ᛊ ᛁ ᛚ</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

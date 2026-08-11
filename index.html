@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yggdrasil Project · a árvore-mundo da ciência de dados de crédito</title>
+<meta name="description" content="Esteiras governadas de machine learning, EDA, seleção de variáveis, segmentação, capital econômico e modelos econométricos satélite para risco de crédito. Pandas puro, roda local e no Databricks.">
+<meta name="theme-color" content="#08080a">
+<link rel="canonical" href="https://richardguilhermeds.github.io/yggdrasil-site/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yggdrasil Project">
+<meta property="og:description" content="Sete módulos isolados para o ciclo do crédito: esteira de ML governada, EDA, seleção em PySpark, segmentadores, capital econômico e econométricos satélite.">
+<meta property="og:image" content="https://richardguilhermeds.github.io/yggdrasil-site/assets/img/g1-arvore.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌳%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<!-- ============================ NAV ============================ -->
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="#topo">
+      <svg class="brand__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M12 22V9"/><path d="M12 9 6 4"/><path d="m12 9 6-5"/><path d="M12 14 7 11"/><path d="m12 14 5-3"/>
+        <path d="M12 22 8 24"/><path d="m12 22 4 2"/>
+      </svg>
+      <span class="brand__txt">Yggdra<span>sil</span></span>
+    </a>
+
+    <div class="nav__links" data-navlinks>
+      <a href="#raizes">Raízes</a>
+      <a href="#ramos">Módulos</a>
+      <a href="#interface">Interface</a>
+      <a href="#galeria">Galeria</a>
+      <a href="tutoriais.html">Tutoriais</a>
+      <a href="metodologia.html">Metodologia</a>
+      <a href="#mundos">Temas</a>
+      <a href="https://github.com/richardguilhermeds/Yggdrasil-Project" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://pypi.org/project/yggdrasil-project/" target="_blank" rel="noopener">PyPI ↗</a>
+    </div>
+
+    <div class="nav__cta">
+      <a class="btn" href="https://github.com/richardguilhermeds/Yggdrasil-Project" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--solid" href="#instalacao">Instalar</a>
+      <button class="nav__burger" data-burger aria-label="Abrir menu" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="topo">
+  <div class="wrap hero__grid">
+
+    <div>
+      <a class="hero__repo" href="https://github.com/richardguilhermeds/Yggdrasil-Project" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+        </svg>
+        richardguilhermeds/Yggdrasil-Project
+        <span class="go">abrir</span>
+      </a>
+
+      <h1 class="hero__title">Yggdrasil</h1>
+      <span class="hero__kenning">estatística · machine learning · tutoriais</span>
+
+      <p class="hero__lede">
+        Uma biblioteca Python de <strong>sete módulos isolados</strong> para o ciclo completo do
+        crédito, da concessão à recuperação e do escore ao capital. O núcleo é
+        <strong>pandas puro</strong>: roda no seu notebook e no Databricks, com ou sem
+        <code>pip install</code>.
+      </p>
+
+      <div class="hero__actions">
+        <div class="cmd">
+          <code>pip install yggdrasil-project</code>
+          <button data-copy="pip install yggdrasil-project">copiar</button>
+        </div>
+      </div>
+
+      <div class="hero__actions">
+        <a class="btn btn--solid btn--lg" href="tutoriais.html">Começar pelos tutoriais</a>
+        <a class="btn btn--lg" href="#ramos">Ver os módulos</a>
+      </div>
+
+      <div class="hero__chips">
+        <a class="chip chip--accent" style="text-decoration:none" href="https://pypi.org/project/yggdrasil-project/" target="_blank" rel="noopener"><span class="dot"></span>PyPI v0.0.11</a>
+        <span class="chip">Python ≥ 3.9</span>
+        <span class="chip">MIT</span>
+        <span class="chip">7 módulos</span>
+        <span class="chip">12 tutoriais</span>
+        <span class="chip">MLflow · PySpark · SHAP</span>
+      </div>
+
+      <blockquote class="hero__quote">
+        “Três raízes sustentam a Yggdrasil, e por elas correm as águas que dão vida aos mundos.”
+      </blockquote>
+    </div>
+
+    <!-- árvore-mundo -->
+    <div>
+      <svg class="tree" viewBox="0 0 680 570" role="img" aria-label="A árvore Yggdrasil: sete ramos, correspondentes aos sete módulos, e três raízes que mergulham nos poços de Urðr, Mímir e Hvergelmir.">
+        <circle class="halo" cx="352" cy="150" r="200"/>
+
+        <g class="limb" stroke-width="1.7">
+          <path d="M340 376 C250 372 140 340 82 216"/>
+          <path d="M340 352 C260 346 178 300 158 140"/>
+          <path d="M340 326 C286 318 258 216 262 92"/>
+          <path d="M340 300 C340 240 366 158 378 74"/>
+          <path d="M340 282 C400 264 462 192 492 100"/>
+          <path d="M340 260 C430 252 540 222 588 160"/>
+          <path d="M340 240 C450 238 578 240 620 240"/>
+        </g>
+
+        <g class="limb" stroke-width="1" opacity=".28">
+          <path d="M262 200 C240 176 214 168 196 150"/>
+          <path d="M378 176 C400 152 428 146 448 132"/>
+          <path d="M158 250 C132 240 116 226 104 208"/>
+          <path d="M492 196 C516 186 536 176 552 162"/>
+          <path d="M340 300 C300 268 268 258 236 252"/>
+          <path d="M340 300 C382 272 418 264 452 260"/>
+        </g>
+
+        <path d="M340 404 C334 340 346 292 340 208" stroke="currentColor" fill="none" stroke-width="9" stroke-linecap="round" opacity=".85"/>
+        <path d="M340 404 C334 340 346 292 340 208" stroke="var(--accent-2)" fill="none" stroke-width="2.5" stroke-linecap="round" opacity=".5"/>
+
+        <g>
+          <circle class="leaf pulse" cx="196" cy="150" r="3.4"/>
+          <circle class="leaf pulse" cx="448" cy="132" r="3"/>
+          <circle class="leaf pulse" cx="104" cy="208" r="3.2"/>
+          <circle class="leaf pulse" cx="552" cy="162" r="3"/>
+          <circle class="leaf pulse" cx="236" cy="252" r="2.8"/>
+          <circle class="leaf pulse" cx="452" cy="260" r="2.8"/>
+          <circle class="leaf pulse" cx="318" cy="140" r="2.6"/>
+          <circle class="leaf pulse" cx="404" cy="212" r="2.6"/>
+        </g>
+
+        <g>
+          <rect class="node-bg" x="34"  y="204" width="90" height="21" rx="6"/><text class="node-tx" x="79"  y="219" text-anchor="middle">esteira ml</text>
+          <rect class="node-bg" x="128" y="118" width="60" height="21" rx="6"/><text class="node-tx" x="158" y="133" text-anchor="middle">eda</text>
+          <rect class="node-bg" x="226" y="70"  width="74" height="21" rx="6"/><text class="node-tx" x="263" y="85"  text-anchor="middle">seleção</text>
+          <rect class="node-bg" x="344" y="52"  width="70" height="21" rx="6"/><text class="node-tx" x="379" y="67"  text-anchor="middle">árvore</text>
+          <rect class="node-bg" x="456" y="78"  width="74" height="21" rx="6"/><text class="node-tx" x="493" y="93"  text-anchor="middle">modelo</text>
+          <rect class="node-bg" x="552" y="138" width="74" height="21" rx="6"/><text class="node-tx" x="589" y="153" text-anchor="middle">capital</text>
+          <rect class="node-bg" x="582" y="230" width="80" height="21" rx="6"/><text class="node-tx" x="622" y="245" text-anchor="middle">satélite</text>
+        </g>
+
+        <path d="M60 412 H620" stroke="var(--line-2)" stroke-width="1" stroke-dasharray="3 7"/>
+
+        <g class="root" stroke-width="1.8">
+          <path d="M340 404 C328 452 276 470 196 512"/>
+          <path d="M340 404 C342 462 344 492 340 528"/>
+          <path d="M340 404 C352 452 404 470 484 512"/>
+        </g>
+        <g class="root" stroke-width=".9" opacity=".4">
+          <path d="M276 470 C258 486 240 490 220 496"/>
+          <path d="M344 492 C324 502 312 512 302 522"/>
+          <path d="M404 470 C422 486 442 490 462 496"/>
+        </g>
+
+        <g>
+          <text class="node-tx" x="188" y="532" text-anchor="middle" style="fill:var(--accent)">URÐR</text>
+          <text class="node-tx" x="188" y="546" text-anchor="middle">estatística</text>
+          <text class="node-tx" x="340" y="548" text-anchor="middle" style="fill:var(--accent)">MÍMIR</text>
+          <text class="node-tx" x="340" y="562" text-anchor="middle">machine learning</text>
+          <text class="node-tx" x="492" y="532" text-anchor="middle" style="fill:var(--accent)">HVERGELMIR</text>
+          <text class="node-tx" x="492" y="546" text-anchor="middle">tutoriais</text>
+        </g>
+      </svg>
+    </div>
+
+  </div>
+</header>
+
+<!-- ============================ RAÍZES ============================ -->
+<section class="section" id="raizes">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᚢ</span> As três raízes</p>
+    <h2 class="h-sec reveal">De onde a árvore bebe</h2>
+    <p class="lede reveal">
+      Na cosmologia nórdica, três fontes sagradas alimentam Yggdrasil. Aqui elas viram os três
+      alicerces do repositório, cada um apoiando o outro, todos no mesmo lugar.
+    </p>
+
+    <div class="roots">
+      <article class="card root-card reveal" data-rune="ᚢ">
+        <span class="root-card__well">Poço de Urðr · das normas e do destino</span>
+        <h3 class="h-card">Estatística</h3>
+        <p>O rigor que torna um número defensável: teste de hipótese, estabilidade no tempo e o porquê de cada métrica.</p>
+        <ul>
+          <li>KS, AUC/Gini, Brier, log loss</li>
+          <li>PSI/CSI por safra e por bin</li>
+          <li>WoE/IV e binning monotônico</li>
+          <li>ADF/KPSS, Ljung-Box, VIF, Chow</li>
+        </ul>
+      </article>
+
+      <article class="card root-card reveal" data-rune="ᛗ">
+        <span class="root-card__well">Poço de Mímir · da sabedoria</span>
+        <h3 class="h-card">Machine learning</h3>
+        <p>Modelos que entram em produção com governança: rastreados no MLflow, explicáveis e versionados.</p>
+        <ul>
+          <li>Esteira de avaliação orquestrada</li>
+          <li>Boosting, florestas e lineares</li>
+          <li>Tuning bayesiano com Optuna</li>
+          <li>SHAP, ratings e relatórios</li>
+        </ul>
+      </article>
+
+      <article class="card root-card reveal" data-rune="ᚻ">
+        <span class="root-card__well">Hvergelmir · de onde brotam os rios</span>
+        <h3 class="h-card">Tutoriais</h3>
+        <p>Doze notebooks passo a passo, prontos para Jupyter e Databricks. A lógica de produção nunca mora neles.</p>
+        <ul>
+          <li>Do zero à esteira completa</li>
+          <li>UIs interativas ao vivo</li>
+          <li>Capital econômico e satélites</li>
+          <li>Dados sintéticos inclusos</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CICLO DO CRÉDITO ============================ -->
+<section class="section section--frame">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᛟ</span> Escopo aplicado</p>
+    <h2 class="h-sec reveal">Um ciclo, não um modelo</h2>
+    <p class="lede reveal">
+      O foco é <strong>crédito de forma ampla</strong>. Os mesmos módulos atendem as três frentes,
+      porque o contrato de dados é o mesmo em todas elas.
+    </p>
+
+    <div class="cycle">
+      <article class="card cycle__step reveal">
+        <span class="n">01</span>
+        <h3 class="h-card">Concessão</h3>
+        <p>Aprovação, definição de limites e precificação. Escore, régua de corte e política que dá para explicar linha a linha.</p>
+      </article>
+      <article class="card cycle__step reveal">
+        <span class="n">02</span>
+        <h3 class="h-card">Recuperação</h3>
+        <p>Cobrança e renegociação. Alvos contínuos em [0,1], propensão de acordo e priorização de fila.</p>
+      </article>
+      <article class="card cycle__step reveal">
+        <span class="n">03</span>
+        <h3 class="h-card">Risco de crédito</h3>
+        <p>Parâmetros PD/LGD/EAD, provisão prospectiva, capital econômico e teste de estresse por cenário.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OS SETE RAMOS ============================ -->
+<section class="section" id="ramos">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᚠ</span> Os sete ramos</p>
+    <h2 class="h-sec reveal">Sete módulos que<br>não se atrapalham</h2>
+    <p class="lede reveal">
+      Cada módulo é isolado e importável sozinho. Esteira de ML, EDA e seleção compartilham o contrato
+      <code>feat_*</code> / <code>dt_ref</code> / <code>amostra</code> / <code>target</code>;
+      os de risco de crédito têm contratos próprios.
+    </p>
+
+    <div class="mods">
+
+      <!-- 01 esteira ml -->
+      <article class="card mod reveal">
+        <div class="mod__txt">
+          <span class="mod__no">RAMO 01</span>
+          <h3 class="h-card">Esteira de ML governada</h3>
+          <p>
+            Avaliação completa de um modelo já treinado, orquestrada por MLflow. As amostras
+            <b>DES</b> e <b>OOT</b> recebem análise completa; <b>SIMUL</b> e <b>BACKTEST</b> são
+            <i>scoring-only</i>. Registra métricas, shifts, ratings em quatro metodologias, PSI e SHAP.
+          </p>
+          <div class="mod__api">
+            <code>MLPipeline</code><code>ColumnConfig</code><code>ratings/</code><code>monitoring/psi</code><code>mlflow_logger</code>
+          </div>
+        </div>
+        <div class="mock">
+          <div class="mock__bar"><span class="dot" style="color:var(--ok)"></span> mlflow · /Shared/Yggdrasil/pd_pf</div>
+          <div class="mock__body">
+            <table class="mtable">
+              <tr><th>métrica</th><th>DES</th><th>OOT</th><th>shift</th></tr>
+              <tr><td>KS</td><td>0.350</td><td>0.362</td><td class="s">+3,6%</td></tr>
+              <tr><td>AUC</td><td>0.722</td><td>0.722</td><td class="s">+0,1%</td></tr>
+              <tr><td>Gini</td><td>0.443</td><td>0.444</td><td class="s">+0,3%</td></tr>
+              <tr><td>PSI</td><td>ref.</td><td>0.043</td><td class="s">estável</td></tr>
+            </table>
+            <div style="margin-top:12px" class="c">
+              ✓ ratings: decis · quantil · arvore · optbin<br>
+              ✓ 4 artefatos SHAP registrados
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 eda -->
+      <article class="card mod reveal">
+        <div class="mod__txt">
+          <span class="mod__no">RAMO 02</span>
+          <h3 class="h-card">EDA de features</h3>
+          <p>
+            Missing global e por safra, percentis no tempo, relação com o alvo, WoE/IV, importância
+            univariada e surrogate multivariada, PSI por feature, monotonicidade, outliers, VIF e
+            detecção de <i>leakage</i>. Tudo consolidado num <code>feature_profile</code> com veredito.
+          </p>
+          <div class="mod__api"><code>run_feature_eda</code><code>EDAConfig</code><code>feature_profile</code></div>
+        </div>
+        <div class="mock">
+          <div class="mock__bar"><span class="dot" style="color:var(--info)"></span> feature_profile · 1 linha por feature</div>
+          <div class="mock__body">
+            <table class="mtable">
+              <tr><th>feature</th><th>IV</th><th>PSI</th><th>veredito</th></tr>
+              <tr><td>feat_renda</td><td>0.312</td><td>0.021</td><td class="s">manter</td></tr>
+              <tr><td>feat_atraso_max</td><td>0.688</td><td>0.017</td><td class="s">manter</td></tr>
+              <tr><td>feat_util_lim</td><td>0.104</td><td>0.183</td><td class="w">revisar</td></tr>
+              <tr><td>feat_dias_pgto</td><td>0.941</td><td>0.009</td><td class="b">leakage</td></tr>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 seleção -->
+      <article class="card mod reveal">
+        <div class="mod__txt">
+          <span class="mod__no">RAMO 03</span>
+          <h3 class="h-card">Seleção de features em PySpark</h3>
+          <p>
+            Seleção por <b>book</b> (grupo de features por prefixo ou palavra-chave) sobre um Spark
+            DataFrame. O funil vai de missing e variância a importância, redundância (Pearson e
+            Spearman), Boruta <i>Spark-native</i> e consenso, com backend <code>"spark"</code> ou <code>"driver"</code>.
+          </p>
+          <div class="mod__api"><code>book</code><code>boruta</code><code>consenso</code><code>ranking global</code></div>
+        </div>
+        <div class="mock">
+          <div class="mock__bar"><span class="dot" style="color:var(--warn)"></span> funil · book “bureau”</div>
+          <div class="mock__body">
+            <div class="flow">
+              <div class="flow__row"><span class="lbl">candidatas</span><span class="st st--ok">412</span></div>
+              <div class="flow__row"><span class="lbl">missing + variância</span><span class="st st--ok">287</span></div>
+              <div class="flow__row"><span class="lbl">importância (IV/KS/AUC)</span><span class="st st--ok">96</span></div>
+              <div class="flow__row"><span class="lbl">redundância ρ &gt; 0.85</span><span class="st st--ok">41</span></div>
+              <div class="flow__row"><span class="lbl">boruta (shadows)</span><span class="st st--run">18</span></div>
+              <div class="flow__row" style="border-color:var(--accent)"><span class="lbl">consenso · selecionada</span><span class="st st--ok">12</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 árvore -->
+      <article class="card mod reveal">
+        <div class="mod__txt">
+          <span class="mod__no">RAMO 04</span>
+          <h3 class="h-card">Árvore de segmentação</h3>
+          <p>
+            <code>TreeSegmenter</code> é uma régua sequencial com UI de cinco abas que atende
+            classificação e regressão pelo mesmo <code>task_type</code>: binning ótimo ou manual,
+            faltantes em bin própria, notas por folha, IV, PSI/CSI, bootstrap, calibração e backtest.
+            Exporta <code>CASE WHEN</code>, PDF e Spark.
+          </p>
+          <div class="mod__api"><code>fit_auto</code><code>suggest_splits</code><code>to_sql</code><code>diff_trees</code><code>apply_spark</code></div>
+        </div>
+        <div class="mock">
+          <div class="mock__bar"><span class="dot" style="color:var(--accent)"></span> TreeSegmenterUI · régua de 6 folhas, monotônica em DES e OOT</div>
+          <a href="assets/img/arvore-interface.png" target="_blank" rel="noopener">
+            <img src="assets/img/arvore-interface.png" alt="Árvore de segmentação real construída na TreeSegmenterUI: raiz com toda a carteira, split por feat_atraso_max e depois por feat_util_lim, resultando em seis folhas coloridas pela inadimplência média, de 5,60% na folha 1 a 48,20% na folha 6." style="width:100%;background:#fff" loading="lazy">
+          </a>
+        </div>
+      </article>
+
+      <!-- 05 model -->
+      <article class="card mod reveal">
+        <div class="mod__txt">
+          <span class="mod__no">RAMO 05</span>
+          <h3 class="h-card">Segmentador orientado a modelo</h3>
+          <p>
+            <code>ModelSegmenter</code> vai da análise univariada (logodds/WoE, IV, inversão de bins
+            entre safras) à seleção de variáveis, ao ajuste, às métricas com fórmula e p-valor, ao SHAP
+            e ao escore que vira ratings. Persistência em JSON mais <code>.model.joblib</code>.
+          </p>
+          <div class="mod__api"><code>tune_optuna</code><code>set_model</code><code>report_pdf</code><code>ALGORITHMS</code></div>
+        </div>
+        <div class="mock">
+          <div class="mock__bar"><span class="dot" style="color:var(--accent)"></span> importância |SHAP| · lightgbm</div>
+          <div class="mock__body">
+            <div class="bars">
+              <div class="bar"><span>util_lim</span><span class="bar__t"><span class="bar__f" style="width:100%"></span></span><span>29.8%</span></div>
+              <div class="bar"><span>renda</span><span class="bar__t"><span class="bar__f" style="width:88%"></span></span><span>26.3%</span></div>
+              <div class="bar"><span>atraso_max</span><span class="bar__t"><span class="bar__f" style="width:77%"></span></span><span>22.9%</span></div>
+              <div class="bar"><span>tempo_rel</span><span class="bar__t"><span class="bar__f" style="width:57%"></span></span><span>17.0%</span></div>
+              <div class="bar"><span>n_produtos</span><span class="bar__t"><span class="bar__f" style="width:13%"></span></span><span>4.0%</span></div>
+            </div>
+            <div style="margin-top:13px" class="c">
+              optuna · trial 40/40 <span class="s">✓</span>  best AUC(OOT) = <span class="s">0.8079</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 capital -->
+      <article class="card mod reveal">
+        <div class="mod__txt">
+          <span class="mod__no">RAMO 06</span>
+          <h3 class="h-card">Capital econômico de carteira</h3>
+          <p>
+            O capital para absorver <b>perdas inesperadas</b> em um ano, no nível do apetite de risco.
+            ASRF/Vasicek analítico, Monte Carlo multifatorial com severidade estocástica, CreditRisk+
+            por recursão de Panjer e CreditMetrics, mais alocação de Euler e RAROC.
+          </p>
+          <div class="mod__api"><code>Portfolio</code><code>Segment</code><code>asrf_capital</code><code>simulate</code><code>euler_allocation</code></div>
+        </div>
+        <div class="mock">
+          <div class="mock__bar"><span class="dot" style="color:var(--bad)"></span> distribuição de perdas · q = 99,9%</div>
+          <div class="mock__body">
+            <svg viewBox="0 0 320 96" width="100%" height="96" role="img" aria-label="Distribuição de perdas com marcações de perda esperada e VaR na cauda.">
+              <path d="M6 90 C40 90 52 24 82 22 C112 20 128 52 156 68 C186 85 218 89 250 90 C275 91 300 90 314 90 Z"
+                    fill="var(--accent)" opacity=".16"/>
+              <path d="M6 90 C40 90 52 24 82 22 C112 20 128 52 156 68 C186 85 218 89 250 90 C275 91 300 90 314 90"
+                    fill="none" stroke="var(--accent)" stroke-width="1.6"/>
+              <line x1="82" y1="16" x2="82" y2="92" stroke="var(--ink-mute)" stroke-width="1" stroke-dasharray="3 4"/>
+              <line x1="232" y1="16" x2="232" y2="92" stroke="var(--bad)" stroke-width="1.4"/>
+              <text x="86" y="14" style="font:9.5px 'JetBrains Mono',monospace;fill:var(--ink-mute)">EL</text>
+              <text x="236" y="14" style="font:9.5px 'JetBrains Mono',monospace;fill:var(--bad)">VaR 99,9%</text>
+            </svg>
+            <table class="mtable" style="margin-top:8px">
+              <tr><td>EL</td><td class="c">perda esperada</td><td>R$ 1,08 mi</td></tr>
+              <tr><td>VaR</td><td class="c">99,9%</td><td>R$ 4,62 mi</td></tr>
+              <tr><td>CE</td><td class="c">VaR menos EL</td><td class="k">R$ 3,54 mi</td></tr>
+              <tr><td>Div.</td><td class="c">benefício</td><td class="s">18,3%</td></tr>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <!-- 07 econométrico -->
+      <article class="card mod reveal">
+        <div class="mod__txt">
+          <span class="mod__no">RAMO 07</span>
+          <h3 class="h-card">Modelos econométricos satélite</h3>
+          <p>
+            O <b>eixo temporal</b>, complementar ao transversal: liga as séries agregadas de PD, LGD e
+            CCF às variáveis macro e projeta por cenário. ARDL, ARIMAX, fator Z de Vasicek, beta e
+            fractional logit, VAR/VECM e painel, com champion-challenger, filtro de sinal econômico
+            e <i>walk-forward</i>.
+          </p>
+          <div class="mod__api"><code>RiskSeries</code><code>ARDL</code><code>VasicekZ</code><code>ScenarioSet</code><code>run_study</code></div>
+        </div>
+        <div class="mock">
+          <div class="mock__bar"><span class="dot" style="color:var(--info)"></span> projeção por cenário · leque 90%</div>
+          <div class="mock__body">
+            <svg viewBox="0 0 320 104" width="100%" height="104" role="img" aria-label="Projeção da taxa de default em leque, com cenários base, adverso e otimista.">
+              <path d="M170 46 C205 40 245 30 310 18 L310 78 C245 70 205 62 170 54 Z" fill="var(--info)" opacity=".14"/>
+              <path d="M8 62 L38 58 L68 66 L98 54 L128 50 L170 50" fill="none" stroke="var(--ink)" stroke-width="1.7"/>
+              <path d="M170 50 C210 46 250 40 310 34" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-dasharray="5 4"/>
+              <path d="M170 50 C210 42 250 30 310 18" fill="none" stroke="var(--bad)" stroke-width="1.3" stroke-dasharray="3 4"/>
+              <path d="M170 50 C210 56 250 68 310 78" fill="none" stroke="var(--ok)" stroke-width="1.3" stroke-dasharray="3 4"/>
+              <line x1="170" y1="8" x2="170" y2="94" stroke="var(--line-2)" stroke-width="1"/>
+              <text x="118" y="18" style="font:9px 'JetBrains Mono',monospace;fill:var(--ink-mute)">observado</text>
+              <text x="176" y="18" style="font:9px 'JetBrains Mono',monospace;fill:var(--ink-mute)">projetado</text>
+            </svg>
+            <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+              <span class="chip" style="color:var(--bad)"><span class="dot"></span>adverso</span>
+              <span class="chip chip--accent"><span class="dot"></span>base</span>
+              <span class="chip" style="color:var(--ok)"><span class="dot"></span>otimista</span>
+            </div>
+            <div class="c" style="margin-top:10px">
+              ARDL(2,1) · desemprego <span class="s">+</span> · renda <span class="s">−</span> · VIF máx 2,4 · DM p=0,03
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ INTERFACE EM AÇÃO ============================ -->
+<section class="section section--frame" id="interface">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᛏ</span> A interface em ação</p>
+    <h2 class="h-sec reveal">A árvore, aba por aba</h2>
+    <p class="lede reveal">
+      A <code>TreeSegmenterUI</code> constrói a régua dentro do notebook, sem sair do Jupyter nem do
+      Databricks. Os três GIFs abaixo são saídas reais da biblioteca sobre uma carteira sintética de
+      24 mil contratos, com 18 safras e amostras DES e OOT.
+    </p>
+
+    <div class="demos">
+
+      <article class="card demo reveal">
+        <div class="demo__txt">
+          <span class="mod__no">ABA CONSTRUÇÃO</span>
+          <h3 class="h-card">A régua crescendo</h3>
+          <p>Cada split é uma decisão sua. A árvore parte da carteira inteira e ganha um nível por vez.</p>
+          <ul class="demo__steps">
+            <li>raiz: 24.000 contratos, 14,1% de inadimplência</li>
+            <li>split 1: feat_atraso_max, corte ótimo em 1,5</li>
+            <li>split 2: feat_util_lim, faltantes em bin própria</li>
+            <li>prune: folhas pouco representativas removidas</li>
+            <li>auto_merge: 6 folhas, de 5,6% a 48,2%</li>
+          </ul>
+        </div>
+        <div class="demo__win">
+          <div class="demo__tabs">
+            <span class="on">Construção</span><span>Variáveis</span><span>Diagnóstico</span><span>Validar</span><span>Avançado</span>
+          </div>
+          <img src="assets/gif/ui-arvore-construcao.gif" alt="Animação da árvore de segmentação crescendo: raiz, três splits sucessivos, poda e fusão automática de folhas." loading="lazy">
+        </div>
+      </article>
+
+      <article class="card demo reveal">
+        <div class="demo__txt">
+          <span class="mod__no">ABA DIAGNÓSTICO</span>
+          <h3 class="h-card">Métricas da régua pronta</h3>
+          <p>Discriminação, ordenação e calibração, sempre com DES e OOT lado a lado.</p>
+          <ul class="demo__steps">
+            <li>curva ROC por amostra</li>
+            <li>KS e o ponto de corte ótimo</li>
+            <li>taxa de default por folha, com IC de Wilson</li>
+            <li>distribuição do escore</li>
+            <li>previsto contra observado</li>
+          </ul>
+        </div>
+        <div class="demo__win">
+          <div class="demo__tabs">
+            <span>Construção</span><span>Variáveis</span><span class="on">Diagnóstico</span><span>Validar</span><span>Avançado</span>
+          </div>
+          <img src="assets/gif/ui-arvore-diagnostico.gif" alt="Animação alternando entre curva ROC, gráfico de KS, taxa de default por folha, distribuição do escore e curva de calibração." loading="lazy">
+        </div>
+      </article>
+
+      <article class="card demo reveal">
+        <div class="demo__txt">
+          <span class="mod__no">ABA VARIÁVEIS</span>
+          <h3 class="h-card">Antes de cortar, entender</h3>
+          <p>A análise univariada dentro da folha, para decidir o corte com evidência e não por intuição.</p>
+          <ul class="demo__steps">
+            <li>distribuição por faixa e risco de cada faixa</li>
+            <li>logodds/WoE e leitura de monotonicidade</li>
+            <li>inversão de ordem entre DES e OOT</li>
+            <li>PSI da variável safra a safra</li>
+          </ul>
+        </div>
+        <div class="demo__win">
+          <div class="demo__tabs">
+            <span>Construção</span><span class="on">Variáveis</span><span>Diagnóstico</span><span>Validar</span><span>Avançado</span>
+          </div>
+          <img src="assets/gif/ui-arvore-variaveis.gif" alt="Animação da análise univariada: distribuição com taxa de risco por faixa, logodds, inversão entre amostras e PSI por safra." loading="lazy">
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ GALERIA ============================ -->
+<section class="section" id="galeria">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᛊ</span> Galeria</p>
+    <h2 class="h-sec reveal">Seis saídas, quatro módulos</h2>
+    <p class="lede reveal">
+      Nenhuma destas figuras foi desenhada à mão: todas saem dos métodos de plot da própria
+      biblioteca. Clique para ver em tamanho cheio.
+    </p>
+
+    <div class="gallery">
+      <a class="card shot reveal" href="assets/img/g1-arvore.png" target="_blank" rel="noopener">
+        <img src="assets/img/g1-arvore.png" alt="Árvore de segmentação com seis folhas, coloridas pela inadimplência média." loading="lazy">
+        <figcaption>
+          <span class="mod__no">RAMO 04 · TREE</span>
+          <b class="cap">Árvore de segmentação</b>
+          <span class="sub">Seis folhas, de 5,6% a 48,2% de inadimplência.</span>
+        </figcaption>
+      </a>
+
+      <a class="card shot reveal" href="assets/img/g2-notas.png" target="_blank" rel="noopener">
+        <img src="assets/img/g2-notas.png" alt="Taxa de default por folha em barras ordenadas, com intervalo de confiança de Wilson." loading="lazy">
+        <figcaption>
+          <span class="mod__no">RAMO 04 · RATINGS</span>
+          <b class="cap">Escada de notas</b>
+          <span class="sub">Monotônica em DES e em OOT, com IC de Wilson 95%.</span>
+        </figcaption>
+      </a>
+
+      <a class="card shot reveal" href="assets/img/g3-ks.png" target="_blank" rel="noopener">
+        <img src="assets/img/g3-ks.png" alt="Gráfico de KS com as distribuições acumuladas de bons e maus e a maior distância entre elas." loading="lazy">
+        <figcaption>
+          <span class="mod__no">RAMO 04 · MÉTRICAS</span>
+          <b class="cap">KS e ponto de corte</b>
+          <span class="sub">KS 0,350 em DES e 0,362 em OOT.</span>
+        </figcaption>
+      </a>
+
+      <a class="card shot reveal" href="assets/img/g4-shap.png" target="_blank" rel="noopener">
+        <img src="assets/img/g4-shap.png" alt="Barras horizontais da importância relativa SHAP por variável." loading="lazy">
+        <figcaption>
+          <span class="mod__no">RAMO 05 · MODEL</span>
+          <b class="cap">Importância SHAP</b>
+          <span class="sub">LightGBM ajustado pelo ModelSegmenter, AUC 0,808 em OOT.</span>
+        </figcaption>
+      </a>
+
+      <a class="card shot reveal" href="assets/img/g5-capital.png" target="_blank" rel="noopener">
+        <img src="assets/img/g5-capital.png" alt="Distribuição de perdas da carteira com as zonas de provisão, capital econômico e cauda." loading="lazy">
+        <figcaption>
+          <span class="mod__no">RAMO 06 · CAPITAL</span>
+          <b class="cap">Distribuição de perdas</b>
+          <span class="sub">Monte Carlo multifatorial, 120 mil cenários, VaR a 99,9%.</span>
+        </figcaption>
+      </a>
+
+      <a class="card shot reveal" href="assets/img/g6-satelite.png" target="_blank" rel="noopener">
+        <img src="assets/img/g6-satelite.png" alt="Projeção da PD em leque, com cenários base, adverso e otimista e faixa de 90%." loading="lazy">
+        <figcaption>
+          <span class="mod__no">RAMO 07 · SATÉLITE</span>
+          <b class="cap">Projeção por cenário</b>
+          <span class="sub">Histórico mais base, adverso e otimista, em leque de 90%.</span>
+        </figcaption>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TUTORIAIS ============================ -->
+<section class="section section--frame" id="tutoriais">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᚻ</span> Hvergelmir · doze nascentes</p>
+    <h2 class="h-sec reveal">Comece por um notebook</h2>
+    <p class="lede reveal">
+      Todos em <code>notebooks/tutoriais/</code>, prontos para Jupyter e Databricks, com dados
+      sintéticos embutidos. Se for a sua primeira vez, o <b>00</b> dá a visão geral em uma sentada.
+    </p>
+
+    <div class="tuts">
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/00_tutorial_yggdrasil.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">00</span><span><b class="tut__t">Visão geral</b><span class="tut__d">A esteira completa em classificação, de ponta a ponta.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/01_tutorial_lgd.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">01</span><span><b class="tut__t">Regressão</b><span class="tut__d">Alvo contínuo em [0,1] com distribuição bimodal.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/02_tutorial_eda_features.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">02</span><span><b class="tut__t">EDA de features</b><span class="tut__d">Do missing por safra ao veredito automático.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/03_tutorial_feature_selection.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">03</span><span><b class="tut__t">Seleção em PySpark</b><span class="tut__d">Funil por book, Boruta e ranking global.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/04_tutorial_tree_segmenter.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">04</span><span><b class="tut__t">Árvore de segmentação</b><span class="tut__d">Classificação e regressão pelo mesmo <code>task_type</code>.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/05_tutorial_instalacao_e_interfaces.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">05</span><span><b class="tut__t">Instalação e interfaces</b><span class="tut__d">Como carregar as UIs local e no Databricks.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/06_tutorial_model_segmenter.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">06</span><span><b class="tut__t">Construtor de modelos</b><span class="tut__d">A UI do ModelSegmenter, aba por aba.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/07_tutorial_esteira_ml_mlflow.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">07</span><span><b class="tut__t">Esteira ML + MLflow</b><span class="tut__d">Experimento, métricas, shifts e artefatos.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/08_tutorial_capital_economico.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">08</span><span><b class="tut__t">Capital econômico</b><span class="tut__d">ASRF, Monte Carlo e alocação de Euler.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/09_tutorial_modelos_econometricos.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">09</span><span><b class="tut__t">Econométricos satélite</b><span class="tut__d">ARDL, fator Z e projeção por cenários.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/10_tutorial_selecao_variaveis.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">10</span><span><b class="tut__t">Esteira de seleção</b><span class="tut__d">Etapas plugáveis, funil, relatório e política.</span></span></a>
+      <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/11_tutorial_interface_series_temporais.ipynb" target="_blank" rel="noopener">
+        <span class="tut__no">11</span><span><b class="tut__t">Interface de séries temporais</b><span class="tut__d">SatelliteUI: da estacionariedade ao backtest.</span></span></a>
+    </div>
+
+    <div class="hero__actions" style="margin-top:28px">
+      <a class="btn" href="tutoriais.html">Índice detalhado dos tutoriais →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ NOVE MUNDOS ============================ -->
+<section class="section" id="mundos">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᛉ</span> Personalize à sua vontade</p>
+    <h2 class="h-sec reveal">Os Nove Mundos</h2>
+    <p class="lede reveal">
+      Yggdrasil sustenta nove reinos. Clique em um deles para recolorir esta página inteira. A escolha
+      fica salva no seu navegador; o padrão é Ásgard, escuro.
+    </p>
+
+    <div class="worlds reveal">
+      <button class="world" data-world-btn="asgard" aria-pressed="true">
+        <span class="world__sw" style="background:linear-gradient(135deg,#e0b252,#0e0e11)"></span>
+        <span><b class="world__n">Ásgard</b><span class="world__s">padrão · ouro dos Æsir</span></span></button>
+      <button class="world" data-world-btn="midgard" aria-pressed="false">
+        <span class="world__sw" style="background:linear-gradient(135deg,#48d17f,#0b100d)"></span>
+        <span><b class="world__n">Midgard</b><span class="world__s">floresta</span></span></button>
+      <button class="world" data-world-btn="niflheim" aria-pressed="false">
+        <span class="world__sw" style="background:linear-gradient(135deg,#6fd6ea,#0a1015)"></span>
+        <span><b class="world__n">Niflheim</b><span class="world__s">névoa e gelo</span></span></button>
+      <button class="world" data-world-btn="muspelheim" aria-pressed="false">
+        <span class="world__sw" style="background:linear-gradient(135deg,#ff7a45,#120a06)"></span>
+        <span><b class="world__n">Muspelheim</b><span class="world__s">brasa</span></span></button>
+      <button class="world" data-world-btn="jotunheim" aria-pressed="false">
+        <span class="world__sw" style="background:linear-gradient(135deg,#86aede,#0d1116)"></span>
+        <span><b class="world__n">Jötunheim</b><span class="world__s">pedra e ventania</span></span></button>
+      <button class="world" data-world-btn="svartalfheim" aria-pressed="false">
+        <span class="world__sw" style="background:linear-gradient(135deg,#b193fb,#0d0b13)"></span>
+        <span><b class="world__n">Svartálfheim</b><span class="world__s">a forja</span></span></button>
+      <button class="world" data-world-btn="helheim" aria-pressed="false">
+        <span class="world__sw" style="background:linear-gradient(135deg,#e8636b,#070707)"></span>
+        <span><b class="world__n">Helheim</b><span class="world__s">alto contraste</span></span></button>
+      <button class="world" data-world-btn="alfheim" aria-pressed="false">
+        <span class="world__sw" style="background:linear-gradient(135deg,#6f4ecc,#f8f6fd)"></span>
+        <span><b class="world__n">Álfheim</b><span class="world__s">claro · luz élfica</span></span></button>
+      <button class="world" data-world-btn="vanaheim" aria-pressed="false">
+        <span class="world__sw" style="background:linear-gradient(135deg,#4c7a24,#f7f8f2)"></span>
+        <span><b class="world__n">Vanaheim</b><span class="world__s">claro · musgo</span></span></button>
+    </div>
+
+    <p class="tiny" style="margin-top:18px">
+      Sete escuros e dois claros. As UIs da biblioteca (<code>TreeSegmenterUI</code> e
+      <code>ModelSegmenterUI</code>) também têm toggle de tema 🌙.
+    </p>
+  </div>
+</section>
+
+<!-- ============================ INSTALAÇÃO ============================ -->
+<section class="section section--frame" id="instalacao">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᚱ</span> Instalação</p>
+    <h2 class="h-sec reveal">Núcleo enxuto,<br>extras sob demanda</h2>
+    <p class="lede reveal">
+      No PyPI a distribuição chama <code>yggdrasil-project</code>, porque o nome <code>yggdrasil</code>
+      já estava tomado. O nome de import continua <code>yggdrasil</code>.
+    </p>
+
+    <div class="hero__actions reveal" style="margin-bottom:26px">
+      <a class="btn" href="https://pypi.org/project/yggdrasil-project/" target="_blank" rel="noopener">pypi.org/project/yggdrasil-project ↗</a>
+      <a class="btn" href="https://github.com/richardguilhermeds/Yggdrasil-Project" target="_blank" rel="noopener">github.com/richardguilhermeds/Yggdrasil-Project ↗</a>
+    </div>
+
+    <div class="install">
+      <div>
+        <pre class="pre reveal"><span class="c"># do PyPI (versão publicada)</span>
+pip install <span class="k">yggdrasil-project</span>
+
+<span class="c"># do GitHub (versão de desenvolvimento)</span>
+pip install <span class="k">git+https://github.com/richardguilhermeds/Yggdrasil-Project.git</span>
+
+<span class="c"># ou clonando, em modo editável</span>
+git clone https://github.com/richardguilhermeds/Yggdrasil-Project.git
+cd Yggdrasil-Project
+pip install -e <span class="k">".[dev]"</span>
+
+<span class="c"># uso mínimo</span>
+<span class="k">from</span> yggdrasil <span class="k">import</span> MLPipeline, ColumnConfig
+
+cfg  = ColumnConfig()   <span class="c"># feat_, dt_ref, amostra, target</span>
+pipe = MLPipeline(cfg, problem_type=<span class="k">"classification"</span>,
+                  ratings=[<span class="k">"decis"</span>, <span class="k">"quantil"</span>, <span class="k">"arvore"</span>, <span class="k">"optbin"</span>])
+res  = pipe.run(df, model=modelo, experiment=<span class="k">"/Shared/Yggdrasil/pd_pf"</span>)
+
+res.metrics_by_sample   <span class="c"># métricas por DES/OOT</span>
+res.shifts              <span class="c"># shifts DES -&gt; OOT</span>
+res.reports             <span class="c"># relatório por grupo homogêneo</span></pre>
+      </div>
+
+      <div class="card reveal" style="padding:6px 20px 12px">
+        <table class="extras">
+          <tr><th>extra</th><th>para quê</th></tr>
+          <tr><td><code>[dev]</code></td><td>núcleo mais pytest, jupyter e nbconvert</td></tr>
+          <tr><td><code>[ui]</code></td><td>UIs interativas (ipywidgets, anywidget)</td></tr>
+          <tr><td><code>[spark]</code></td><td>régua em PySpark fora do Databricks</td></tr>
+          <tr><td><code>[econometric]</code></td><td>satélites: statsmodels e arch</td></tr>
+          <tr><td><code>[catboost]</code></td><td>CatBoost (LightGBM e XGBoost já no core)</td></tr>
+          <tr><td><code>[pycaret]</code></td><td>treino automatizado via PyCaret</td></tr>
+        </table>
+        <p class="tiny" style="margin:14px 2px 0">
+          O layout é <i>flat</i>: o pacote vive na raiz do repositório, então <code>import yggdrasil</code>
+          funciona mesmo sem instalar, rodando da raiz do clone ou no Databricks Repos, que já põe a
+          raiz do repo no <code>sys.path</code>.
+        </p>
+        <p class="tiny" style="margin:12px 2px 0">
+          Localmente o MLflow 3.x exige <code>MLFLOW_ALLOW_FILE_STORE=true</code> para o backend
+          <code>./mlruns</code>. Os notebooks já definem isso. No Databricks, use o tracking do workspace.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CTA ============================ -->
+<section class="section cta">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="justify-content:center"><span class="rune" aria-hidden="true">ᛦ</span> Ragnarök é opcional</p>
+    <h2 class="h-sec reveal">Suba na árvore</h2>
+    <p class="lede reveal">
+      Código aberto sob licença MIT. Issues, ideias e pull requests são bem-vindos: a árvore cresce
+      mais rápido com mais raízes.
+    </p>
+    <div class="hero__actions reveal">
+      <a class="btn btn--solid btn--lg" href="https://github.com/richardguilhermeds/Yggdrasil-Project" target="_blank" rel="noopener">Ver no GitHub ↗</a>
+      <a class="btn btn--lg" href="https://pypi.org/project/yggdrasil-project/" target="_blank" rel="noopener">Pacote no PyPI ↗</a>
+      <a class="btn btn--lg" href="tutoriais.html">Tutoriais</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ RODAPÉ ============================ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__in">
+      <div class="foot__col" style="max-width:320px">
+        <a class="brand" href="#topo" style="margin-bottom:12px">
+          <svg class="brand__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <path d="M12 22V9"/><path d="M12 9 6 4"/><path d="m12 9 6-5"/><path d="M12 14 7 11"/><path d="m12 14 5-3"/>
+            <path d="M12 22 8 24"/><path d="m12 22 4 2"/>
+          </svg>
+          <span class="brand__txt">Yggdra<span>sil</span></span>
+        </a>
+        <p class="tiny" style="margin:0">
+          Repositório pessoal de ciência de dados aplicada a crédito, mantido por
+          <b style="color:var(--ink-dim)">Richard Guilherme</b>, cientista de dados com foco em
+          crédito e MLOps em Databricks.
+        </p>
+      </div>
+
+      <div class="foot__col">
+        <h4>Projeto</h4>
+        <a href="#ramos">Os sete módulos</a>
+        <a href="#interface">A interface em ação</a>
+        <a href="tutoriais.html">Tutoriais</a>
+        <a href="metodologia.html">Metodologia</a>
+        <a href="#instalacao">Instalação</a>
+      </div>
+
+      <div class="foot__col">
+        <h4>Código</h4>
+        <a href="https://github.com/richardguilhermeds/Yggdrasil-Project" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://pypi.org/project/yggdrasil-project/" target="_blank" rel="noopener">PyPI ↗</a>
+        <a href="https://github.com/richardguilhermeds/Yggdrasil-Project/issues" target="_blank" rel="noopener">Issues ↗</a>
+        <a href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/docs/metodologia.md" target="_blank" rel="noopener">docs/metodologia.md ↗</a>
+        <a href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/LICENSE" target="_blank" rel="noopener">Licença MIT ↗</a>
+      </div>
+
+      <div class="foot__col">
+        <h4>Contato</h4>
+        <a href="https://www.linkedin.com/in/richard-guilherme-da/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://github.com/richardguilhermeds" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="foot__bot">
+      <span>© 2026 Richard Guilherme · MIT</span>
+      <span class="mono" style="letter-spacing:.14em">ᚤ ᚷ ᚷ ᛞ ᚱ ᚨ ᛊ ᛁ ᛚ</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
