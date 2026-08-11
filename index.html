@@ -396,18 +396,15 @@
           <div class="mod__api"><code>tune_optuna</code><code>set_model</code><code>report_pdf</code><code>ALGORITHMS</code></div>
         </div>
         <div class="mock">
-          <div class="mock__bar"><span class="dot" style="color:var(--accent)"></span> importância |SHAP| · lightgbm</div>
-          <div class="mock__body">
-            <div class="bars">
-              <div class="bar"><span>util_lim</span><span class="bar__t"><span class="bar__f" style="width:100%"></span></span><span>29.8%</span></div>
-              <div class="bar"><span>renda</span><span class="bar__t"><span class="bar__f" style="width:88%"></span></span><span>26.3%</span></div>
-              <div class="bar"><span>atraso_max</span><span class="bar__t"><span class="bar__f" style="width:77%"></span></span><span>22.9%</span></div>
-              <div class="bar"><span>tempo_rel</span><span class="bar__t"><span class="bar__f" style="width:57%"></span></span><span>17.0%</span></div>
-              <div class="bar"><span>n_produtos</span><span class="bar__t"><span class="bar__f" style="width:13%"></span></span><span>4.0%</span></div>
-            </div>
-            <div style="margin-top:13px" class="c">
-              optuna · trial 40/40 <span class="s">✓</span>  best AUC(OOT) = <span class="s">0.8079</span>
-            </div>
+          <div class="mock__bar"><span class="dot" style="color:var(--accent)"></span> beeswarm SHAP · lightgbm · AUC(OOT) 0,808</div>
+          <a href="assets/img/shap-beeswarm.png" target="_blank" rel="noopener">
+            <img src="assets/img/shap-beeswarm.png" alt="Beeswarm SHAP do modelo LightGBM: cada ponto é um contrato, a posição no eixo x é a contribuição da variável para o escore e a cor é o valor da variável. feat_util_lim alta empurra o risco para cima; feat_renda alta empurra para baixo." style="width:100%;background:#fff" loading="lazy">
+          </a>
+          <div class="mock__body" style="border-top:1px solid var(--line)">
+            <span class="c">
+              Um ponto por contrato. À direita, empurra o escore para cima;
+              <span class="k">util_lim</span> alta agrava, <span class="k">renda</span> alta protege.
+            </span>
           </div>
         </div>
       </article>
