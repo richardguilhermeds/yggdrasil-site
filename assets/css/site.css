@@ -317,6 +317,9 @@ h1, h2, h3, .display {
   letter-spacing: -0.045em; line-height: 0.84;
   margin: 14px 0 0;
 }
+/* mesmo corte da logo da nav: "SIL" no accent, então o título grande e a marca
+   da barra contam a mesma história e acompanham a troca de mundo juntos */
+.hero__title span { color: var(--accent); }
 .hero__kenning {
   font-family: "JetBrains Mono", monospace; font-size: clamp(10px, 1.4vw, 13px);
   letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent);
