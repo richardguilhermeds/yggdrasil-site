@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Yggdrasil">
+  <rect width="32" height="32" rx="7" fill="#0e0e11"/>
+  <g stroke="#e0b252" stroke-linecap="round" fill="none">
+    <path d="M16 24.8 8.2 27.8M16 24.8 23.8 27.8" stroke-width="2.3"/>
+    <path d="M16 14.6 8.2 7.2M16 14.6 23.8 7.2" stroke-width="2.9"/>
+    <path d="M16 24.8V13.3" stroke-width="3.7"/>
+  </g>
+  <g fill="#f0cd85">
+    <circle cx="8.2" cy="7.2" r="2"/>
+    <circle cx="23.8" cy="7.2" r="2"/>
+  </g>
+</svg>
