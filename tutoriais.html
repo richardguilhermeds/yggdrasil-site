@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tutoriais · Yggdrasil Project</title>
-<meta name="description" content="Doze notebooks passo a passo do Yggdrasil Project: esteira de ML, EDA, triagem e seleção de variáveis, segmentadores, capital econômico e modelos econométricos satélite.">
+<meta name="description" content="Onze notebooks passo a passo do Yggdrasil Project: esteira de ML, EDA, seleção de features e de variáveis, segmentadores, capital econômico e modelos econométricos satélite.">
 <meta name="theme-color" content="#08080a">
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
@@ -64,12 +64,12 @@
     <p class="eyebrow"><span class="rune" aria-hidden="true">ᚻ</span> Hvergelmir · de onde brotam os rios</p>
     <h1>Tutoriais</h1>
     <p class="lede">
-      Doze notebooks passo a passo em <code>notebooks/tutoriais/</code>, prontos para Jupyter e
+      Onze notebooks passo a passo em <code>notebooks/tutoriais/</code>, prontos para Jupyter e
       Databricks, com dados sintéticos embutidos. A lógica de produção nunca mora aqui: ela vive em
       <code>yggdrasil/</code>. Estes cadernos existem para mostrar <i>como usar</i>.
     </p>
     <div class="hero__chips" style="margin-top:22px">
-      <span class="chip chip--accent"><span class="dot"></span>12 notebooks</span>
+      <span class="chip chip--accent"><span class="dot"></span>11 notebooks</span>
       <span class="chip">Jupyter · Databricks</span>
       <span class="chip">dados sintéticos</span>
     </div>
@@ -112,21 +112,19 @@
       <h2 id="trilha-2">2 · Features: da exploração à seleção</h2>
       <p>
         Antes de qualquer modelo, entender e podar o conjunto de variáveis. O <b>02</b> perfila cada
-        feature e emite um veredito. Depois vêm <b>dois estágios em sequência</b>, que é onde as
-        pessoas costumam se confundir: o <b>03</b> é a peneira do <b>universo</b> — centenas de
-        colunas agrupadas por book, com Boruta e consenso, devolvendo uma <i>shortlist</i>; o
-        <b>10</b> pega essa lista já curta e aplica a <b>régua do modelo</b> dentro do segmentador,
-        com PSI, monotonia e VIF, produzindo a política em JSON e o relatório do comitê.
-        Um corta o universo; o outro documenta a régua final.
+        feature e emite um veredito. O <b>03</b> cobre a seleção inteira em <b>duas partes que rodam
+        em sequência</b>: a Parte 1 é a peneira do <b>universo</b> — centenas de colunas agrupadas
+        por book, com Boruta e consenso, devolvendo uma <i>shortlist</i>; a Parte 2 pega essa lista
+        já curta e aplica a <b>régua do modelo</b> dentro do segmentador, com PSI, monotonia e VIF,
+        produzindo a política em JSON e o relatório do comitê. Uma corta o universo; a outra
+        documenta a régua final.
       </p>
 
       <div class="tuts" style="margin-top:24px">
         <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/02_tutorial_eda_features.ipynb" target="_blank" rel="noopener">
           <span class="tut__no">02</span><span><b class="tut__t">EDA de features</b><span class="tut__d">Missing global e por safra, percentis no tempo, WoE/IV, PSI por feature, VIF, leakage e <code>feature_profile</code> com veredito.</span></span></a>
         <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/03_tutorial_feature_selection.ipynb" target="_blank" rel="noopener">
-          <span class="tut__no">03</span><span><b class="tut__t">Triagem de features por book</b><span class="tut__d">Antes do modelo: funil por book com missing, variância, importância RF com IV/KS/AUC, redundância, Boruta e consenso. Roda em <code>pandas</code> <b>ou</b> Spark — o backend vem do tipo do DataFrame.</span></span></a>
-        <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/10_tutorial_selecao_variaveis.ipynb" target="_blank" rel="noopener">
-          <span class="tut__no">10</span><span><b class="tut__t">Esteira de seleção de variáveis</b><span class="tut__d">A régua do modelo sobre a lista já curta: etapas plugáveis (categóricas, IV, PSI, monotonia, correlação, VIF), funil, relatório consolidado e política em JSON.</span></span></a>
+          <span class="tut__no">03</span><span><b class="tut__t">Seleção de features e de variáveis, ponta a ponta</b><span class="tut__d">Parte 1 — triagem do universo por book (missing, variância, importância RF com IV/KS/AUC, redundância, Boruta e consenso), em <code>pandas</code> <b>ou</b> Spark. Parte 2 — a régua do modelo sobre a lista curta: etapas plugáveis (categóricas, IV, PSI, monotonia, correlação, VIF), funil, relatório e política em JSON.</span></span></a>
       </div>
 
       <h2 id="trilha-3">3 · Segmentadores e a esteira governada</h2>
