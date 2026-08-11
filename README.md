@@ -63,7 +63,7 @@ valendo nos dois casos.
 entrou num commit único, então reverter é um comando:
 
 ```bash
-git revert --no-edit c8ff0a4 && git push
+git revert --no-edit 97030aa && git push
 ```
 
 Se preferir voltar os arquivos exatamente como estavam, sem criar commit de revert:
