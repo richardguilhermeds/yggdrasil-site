@@ -73,14 +73,17 @@
 
 <!-- ============================ HERO ============================ -->
 <header class="hero" id="topo">
-  <div class="wrap hero__grid">
+  <div class="wrap">
+
+    <!-- título em largura cheia: dentro da coluna de texto ele estourava por
+         cima da árvore, porque 208px de Anton não cabem em meia página -->
+    <p class="eyebrow"><span class="rune" aria-hidden="true">ᛦ</span> A árvore-mundo · ciência de dados de crédito</p>
+    <h1 class="hero__title">Yggdra<span>sil</span></h1>
+    <span class="hero__kenning">estatística · machine learning · tutoriais</span>
+
+  <div class="hero__grid">
 
     <div>
-      <p class="eyebrow"><span class="rune" aria-hidden="true">ᛦ</span> A árvore-mundo · ciência de dados de crédito</p>
-
-      <h1 class="hero__title">Yggdra<span>sil</span></h1>
-      <span class="hero__kenning">estatística · machine learning · tutoriais</span>
-
       <p class="hero__lede">
         Uma biblioteca Python de <strong>sete módulos isolados</strong> para o ciclo completo do
         crédito, da concessão à recuperação e do escore ao capital. O núcleo é
@@ -119,7 +122,7 @@
 
     <!-- árvore-mundo -->
     <div>
-      <svg class="tree" viewBox="0 0 680 570" role="img" aria-label="A árvore Yggdrasil: sete ramos, correspondentes aos sete módulos, e três raízes que mergulham nos poços de Urðr, Mímir e Hvergelmir.">
+      <svg class="tree" viewBox="0 0 680 590" role="img" aria-label="A árvore Yggdrasil: sete ramos, correspondentes aos sete módulos, e três raízes que mergulham nos poços de Urðr, Mímir e Hvergelmir.">
         <circle class="halo" cx="352" cy="150" r="200"/>
 
         <g class="limb" stroke-width="1.7">
@@ -156,13 +159,13 @@
         </g>
 
         <g>
-          <rect class="node-bg" x="34"  y="204" width="90" height="21" rx="6"/><text class="node-tx" x="79"  y="219" text-anchor="middle">esteira ml</text>
-          <rect class="node-bg" x="128" y="118" width="60" height="21" rx="6"/><text class="node-tx" x="158" y="133" text-anchor="middle">eda</text>
-          <rect class="node-bg" x="226" y="70"  width="74" height="21" rx="6"/><text class="node-tx" x="263" y="85"  text-anchor="middle">seleção</text>
-          <rect class="node-bg" x="344" y="52"  width="70" height="21" rx="6"/><text class="node-tx" x="379" y="67"  text-anchor="middle">árvore</text>
-          <rect class="node-bg" x="456" y="78"  width="74" height="21" rx="6"/><text class="node-tx" x="493" y="93"  text-anchor="middle">modelo</text>
-          <rect class="node-bg" x="552" y="138" width="74" height="21" rx="6"/><text class="node-tx" x="589" y="153" text-anchor="middle">capital</text>
-          <rect class="node-bg" x="582" y="230" width="80" height="21" rx="6"/><text class="node-tx" x="622" y="245" text-anchor="middle">satélite</text>
+          <rect class="node-bg" x="21"  y="200" width="110" height="28" rx="8"/><text class="node-tx" x="76"  y="219" text-anchor="middle">esteira ml</text>
+          <rect class="node-bg" x="131" y="114" width="54"  height="28" rx="8"/><text class="node-tx" x="158" y="133" text-anchor="middle">eda</text>
+          <rect class="node-bg" x="220" y="66"  width="84"  height="28" rx="8"/><text class="node-tx" x="262" y="85"  text-anchor="middle">seleção</text>
+          <rect class="node-bg" x="340" y="48"  width="76"  height="28" rx="8"/><text class="node-tx" x="378" y="67"  text-anchor="middle">árvore</text>
+          <rect class="node-bg" x="452" y="74"  width="80"  height="28" rx="8"/><text class="node-tx" x="492" y="93"  text-anchor="middle">modelo</text>
+          <rect class="node-bg" x="548" y="134" width="82"  height="28" rx="8"/><text class="node-tx" x="589" y="153" text-anchor="middle">capital</text>
+          <rect class="node-bg" x="576" y="226" width="88"  height="28" rx="8"/><text class="node-tx" x="620" y="245" text-anchor="middle">satélite</text>
         </g>
 
         <path d="M60 412 H620" stroke="var(--line-2)" stroke-width="1" stroke-dasharray="3 7"/>
@@ -179,17 +182,18 @@
         </g>
 
         <g>
-          <text class="node-tx" x="188" y="532" text-anchor="middle" style="fill:var(--accent)">URÐR</text>
-          <text class="node-tx" x="188" y="546" text-anchor="middle">estatística</text>
-          <text class="node-tx" x="340" y="548" text-anchor="middle" style="fill:var(--accent)">MÍMIR</text>
-          <text class="node-tx" x="340" y="562" text-anchor="middle">machine learning</text>
-          <text class="node-tx" x="492" y="532" text-anchor="middle" style="fill:var(--accent)">HVERGELMIR</text>
-          <text class="node-tx" x="492" y="546" text-anchor="middle">tutoriais</text>
+          <text class="node-tx node-tx--well" x="188" y="532" text-anchor="middle" style="fill:var(--accent)">URÐR</text>
+          <text class="node-tx node-tx--sub"  x="188" y="553" text-anchor="middle">estatística</text>
+          <text class="node-tx node-tx--well" x="340" y="552" text-anchor="middle" style="fill:var(--accent)">MÍMIR</text>
+          <text class="node-tx node-tx--sub"  x="340" y="573" text-anchor="middle">machine learning</text>
+          <text class="node-tx node-tx--well" x="492" y="532" text-anchor="middle" style="fill:var(--accent)">HVERGELMIR</text>
+          <text class="node-tx node-tx--sub"  x="492" y="553" text-anchor="middle">tutoriais</text>
         </g>
       </svg>
     </div>
 
-  </div>
+  </div><!-- /hero__grid -->
+  </div><!-- /wrap -->
 </header>
 
 <!-- ============================ RAÍZES ============================ -->
