@@ -1,15 +1,15 @@
-# Domínio próprio: yggdrasilproject.com.br
+# Domínio próprio: yggdrasil-project.com.br
 
 Passo a passo para apontar o domínio para este site no GitHub Pages. O endereço
 principal é o **domínio puro** (apex); o `www` redireciona para ele.
 
 | | |
 |---|---|
-| Domínio | `yggdrasilproject.com.br` |
-| Registro | [Registro.br](https://registro.br) (NIC.br), R$ 40/ano fixo |
+| Domínio | `yggdrasil-project.com.br` |
+| Registro | [Registro.br](https://registro.br) (NIC.br) |
 | Hospedagem | GitHub Pages, gratuita |
 | HTTPS | Let's Encrypt via GitHub, gratuito e automático |
-| Custo total | **R$ 40/ano** |
+| Custo | **R$ 40** por 1 ano, R$ 76 por 2, R$ 112 por 3 (R$ 36/ano a partir do segundo) |
 
 ---
 
@@ -17,13 +17,20 @@ principal é o **domínio puro** (apex); o `www` redireciona para ele.
 
 1. Crie a conta em [registro.br](https://registro.br) com **CPF ou CNPJ** (obrigatório
    para `.com.br`, é um domínio restrito a titulares brasileiros).
-2. Busque `yggdrasilproject` e escolha `.com.br`.
-3. Pague por PIX ou boleto. O domínio é ativado quando o pagamento compensa.
-4. Deixe marcado o **DNS do Registro.br** (gratuito). Sem servidor DNS respondendo, o
-   domínio fica preso em "aguardando configuração de DNS" e não resolve.
+2. Busque `yggdrasil-project` e escolha `.com.br`.
+3. Na solicitação, **não informe servidores DNS próprios**: deixe o Registro.br usar os
+   servidores autoritativos dele, que são gratuitos.
+4. O domínio é registrado em até 5 minutos (a fila de tickets roda a cada 5 min) e a
+   cobrança chega depois, por e-mail. Pague por Pix, cartão VISA/MasterCard ou boleto.
+
+> **O registro vem antes do pagamento.** No Registro.br o domínio já é seu assim que o
+> ticket é processado; a cobrança é uma manutenção anual com vencimento, não um portão de
+> liberação. Ou seja, dá para configurar o DNS e subir o site enquanto a fatura está em
+> aberto. Se a fatura vencer sem pagamento, o domínio congela e depois volta para o
+> mercado.
 
 > Registre direto no Registro.br, não por revenda. Revendas cobram de R$ 45 a R$ 80 no
-> primeiro ano e sobem na renovação; o Registro.br cobra R$ 40 todo ano.
+> primeiro ano e sobem na renovação.
 
 ## 2. Configurar o DNS
 
@@ -48,8 +55,8 @@ domínios apex. O **CNAME** do `www` aponta para o domínio padrão do usuário,
 Verifique a propagação:
 
 ```bash
-dig +short yggdrasilproject.com.br A
-dig +short www.yggdrasilproject.com.br CNAME
+dig +short yggdrasil-project.com.br A
+dig +short www.yggdrasil-project.com.br CNAME
 ```
 
 O primeiro deve devolver os quatro IPs `185.199.10x.153`; o segundo,
@@ -63,7 +70,7 @@ o site fica fora do ar até o DNS subir.
 
 1. Crie na raiz do repositório um arquivo `CNAME` contendo uma única linha:
    ```
-   yggdrasilproject.com.br
+   yggdrasil-project.com.br
    ```
    (equivale a preencher o campo em **Settings → Pages → Custom domain**, que gera esse
    mesmo arquivo).
