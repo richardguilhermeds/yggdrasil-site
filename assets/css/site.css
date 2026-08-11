@@ -359,13 +359,25 @@ h1, h2, h3, .display {
 /* O título fica FORA deste grid, em largura cheia. Assim a árvore começa
    abaixo dele e a coluna direita pode ficar larga sem colidir com o "SIL". */
 .hero__grid {
-  display: grid; grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
   gap: clamp(20px, 3vw, 44px); align-items: start;
   margin-top: clamp(20px, 2.6vw, 34px);
 }
 @media (max-width: 900px) { .hero__grid { grid-template-columns: 1fr; } }
 
 .tree { width: 100%; height: auto; color: var(--accent); display: block; }
+
+/* A árvore sangra para a DIREITA, passando da margem do container e indo em
+   direção à borda da tela. O .hero tem overflow:hidden, então isso não cria
+   barra de rolagem horizontal. Só no layout de duas colunas: no empilhado a
+   árvore volta a ser centrada. */
+@media (min-width: 901px) {
+  .tree {
+    --bleed: clamp(0px, 7vw, 130px);
+    width: calc(100% + var(--bleed));
+    margin-right: calc(var(--bleed) * -1);
+  }
+}
 .tree .limb { stroke: currentColor; fill: none; stroke-linecap: round; opacity: 0.55; }
 .tree .root { stroke: var(--ink-mute); fill: none; stroke-linecap: round; opacity: 0.75; }
 .tree .leaf { fill: var(--accent); }
@@ -500,9 +512,27 @@ h1, h2, h3, .display {
 
 .cycle { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; }
 @media (max-width: 780px) { .cycle { grid-template-columns: 1fr; } }
-.cycle__step { padding: 24px 22px; position: relative; }
+.cycle__step {
+  padding: 24px 22px; position: relative;
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease),
+              background 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
 .cycle__step .n {
   font-family: "Anton", sans-serif; font-size: 40px; color: var(--accent); opacity: 0.28; line-height: 1;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  display: inline-block;
+}
+/* mesmo destaque das três raízes: o número acende e cresce um pouco */
+.cycle__step:hover {
+  border-color: var(--accent);
+  background: var(--card-2);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -24px var(--accent-glow), var(--shadow);
+}
+.cycle__step:hover .n { opacity: 1; transform: scale(1.08); }
+@media (prefers-reduced-motion: reduce) {
+  .cycle__step:hover { transform: none; }
+  .cycle__step:hover .n { transform: none; }
 }
 .cycle__step h3 { margin: 6px 0 8px; font-size: 19px; }
 .cycle__step p { margin: 0; font-size: 14px; color: var(--ink-dim); }
