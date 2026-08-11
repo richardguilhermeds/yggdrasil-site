@@ -45,6 +45,33 @@ Helheim) e dois claros: Álfheim e Vanaheim.
 > **Nunca use hex fixo no HTML.** Um valor cravado não acompanha a troca de mundo e quebra o tema.
 > Para criar um tema novo, copie um bloco existente e troque só os valores.
 
+## A árvore interativa (e como desligá-la)
+
+A árvore do hero reage ao ponteiro de duas formas:
+
+- **Inclinação com profundidade.** O JS escreve `--mx` e `--my` (de −0,5 a 0,5) conforme o
+  mouse anda pelo hero; o resto é CSS. A copa, o halo e as raízes se deslocam em
+  intensidades diferentes, o que dá a sensação de camadas.
+- **Realce por ramo.** Passar o ponteiro sobre um galho ou sua cápsula acende aquele módulo
+  e recua os outros para 32% de opacidade. Cada ramo tem uma trilha invisível de 26px
+  (`.ramo__hit`), porque acertar um traço de 1,7px com o mouse é impossível.
+
+Fica desligada em telas de toque e sob `prefers-reduced-motion`. O realce por ramo continua
+valendo nos dois casos.
+
+**Para voltar atrás.** O estado anterior está na tag `arvore-estatica`, e a interatividade
+entrou num commit único, então reverter é um comando:
+
+```bash
+git revert --no-edit c8ff0a4 && git push
+```
+
+Se preferir voltar os arquivos exatamente como estavam, sem criar commit de revert:
+
+```bash
+git checkout arvore-estatica -- index.html assets/css/site.css assets/js/site.js
+```
+
 ## Rodar localmente
 
 ```bash

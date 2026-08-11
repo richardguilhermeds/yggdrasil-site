@@ -74,6 +74,38 @@
     }
   });
 
+  /* ---------------- árvore que segue o ponteiro ----------------
+     Só escreve duas custom properties; toda a animação é CSS. Fica fora de
+     touch e de prefers-reduced-motion, e as escritas são agrupadas num
+     requestAnimationFrame para não recalcular estilo a cada pixel do mouse. */
+
+  var hero = document.querySelector(".hero");
+  var tree = document.querySelector(".tree");
+  var pontFino = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var calmo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (hero && tree && pontFino && !calmo) {
+    var raf = 0, mx = 0, my = 0;
+
+    var aplicar = function () {
+      raf = 0;
+      tree.style.setProperty("--mx", mx.toFixed(3));
+      tree.style.setProperty("--my", my.toFixed(3));
+    };
+    var agendar = function () { if (!raf) raf = requestAnimationFrame(aplicar); };
+
+    hero.addEventListener("pointermove", function (ev) {
+      var r = hero.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      // -0.5 a 0.5 em cada eixo, medido sobre o hero inteiro
+      mx = Math.min(0.5, Math.max(-0.5, (ev.clientX - r.left) / r.width - 0.5));
+      my = Math.min(0.5, Math.max(-0.5, (ev.clientY - r.top) / r.height - 0.5));
+      agendar();
+    });
+
+    hero.addEventListener("pointerleave", function () { mx = my = 0; agendar(); });
+  }
+
   /* ---------------- estrelas do GitHub ----------------
      Os contadores nascem com `hidden` e só aparecem se a API responder: sem
      rede, offline ou estourando o rate limit (60 req/h por IP, sem token), a

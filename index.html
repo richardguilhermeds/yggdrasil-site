@@ -125,16 +125,6 @@
       <svg class="tree" viewBox="0 0 680 590" role="img" aria-label="A árvore Yggdrasil: sete ramos, correspondentes aos sete módulos, e três raízes que mergulham nos poços de Urðr, Mímir e Hvergelmir.">
         <circle class="halo" cx="352" cy="150" r="200"/>
 
-        <g class="limb" stroke-width="1.7">
-          <path d="M340 376 C250 372 140 340 82 216"/>
-          <path d="M340 352 C260 346 178 300 158 140"/>
-          <path d="M340 326 C286 318 258 216 262 92"/>
-          <path d="M340 300 C340 240 366 158 378 74"/>
-          <path d="M340 282 C400 264 462 192 492 100"/>
-          <path d="M340 260 C430 252 540 222 588 160"/>
-          <path d="M340 240 C450 238 578 240 620 240"/>
-        </g>
-
         <g class="limb" stroke-width="1" opacity=".28">
           <path d="M262 200 C240 176 214 168 196 150"/>
           <path d="M378 176 C400 152 428 146 448 132"/>
@@ -158,18 +148,55 @@
           <circle class="leaf pulse" cx="404" cy="212" r="2.6"/>
         </g>
 
-        <!-- Rótulos da esquerda para a direita. Largura de cada cápsula é
-             calculada pelo nº de caracteres (JetBrains Mono a 14px ≈ 8,7px por
-             caractere) mais 20px de respiro, e as alturas foram escalonadas
-             para que cápsulas vizinhas nunca se cruzem. -->
-        <g>
-          <rect class="node-bg" x="57"  y="200" width="50"  height="28" rx="8"/><text class="node-tx" x="82"  y="219" text-anchor="middle">eda</text>
-          <rect class="node-bg" x="74"  y="114" width="168" height="28" rx="8"/><text class="node-tx" x="158" y="133" text-anchor="middle">feature selection</text>
-          <rect class="node-bg" x="160" y="66"  width="134" height="28" rx="8"/><text class="node-tx" x="227" y="85"  text-anchor="middle">decision tree</text>
-          <rect class="node-bg" x="298" y="48"  width="160" height="28" rx="8"/><text class="node-tx" x="378" y="67"  text-anchor="middle">machine learning</text>
-          <rect class="node-bg" x="451" y="86"  width="82"  height="28" rx="8"/><text class="node-tx" x="492" y="105" text-anchor="middle">ml flow</text>
-          <rect class="node-bg" x="547" y="146" width="82"  height="28" rx="8"/><text class="node-tx" x="588" y="165" text-anchor="middle">capital</text>
-          <rect class="node-bg" x="545" y="226" width="134" height="28" rx="8"/><text class="node-tx" x="612" y="245" text-anchor="middle">econométricos</text>
+        <!-- Cada ramo é um <g class="ramo"> com o galho, uma trilha invisível
+             de clique (o traço fino é impossível de acertar com o mouse), a
+             cápsula e o rótulo. Agrupar assim permite acender o galho inteiro
+             quando o ponteiro passa por qualquer parte dele.
+             Largura da cápsula = nº de caracteres × ~8,7px (JetBrains Mono a
+             14px) + 20px de respiro; alturas escalonadas para não se cruzarem. -->
+        <g class="ramos">
+          <g class="ramo">
+            <path class="limb" stroke-width="1.7" d="M340 376 C250 372 140 340 82 216"/>
+            <path class="ramo__hit" d="M340 376 C250 372 140 340 82 216"/>
+            <rect class="node-bg" x="57" y="200" width="50" height="28" rx="8"/>
+            <text class="node-tx" x="82" y="219" text-anchor="middle">eda</text>
+          </g>
+          <g class="ramo">
+            <path class="limb" stroke-width="1.7" d="M340 352 C260 346 178 300 158 140"/>
+            <path class="ramo__hit" d="M340 352 C260 346 178 300 158 140"/>
+            <rect class="node-bg" x="74" y="114" width="168" height="28" rx="8"/>
+            <text class="node-tx" x="158" y="133" text-anchor="middle">feature selection</text>
+          </g>
+          <g class="ramo">
+            <path class="limb" stroke-width="1.7" d="M340 326 C286 318 258 216 262 92"/>
+            <path class="ramo__hit" d="M340 326 C286 318 258 216 262 92"/>
+            <rect class="node-bg" x="160" y="66" width="134" height="28" rx="8"/>
+            <text class="node-tx" x="227" y="85" text-anchor="middle">decision tree</text>
+          </g>
+          <g class="ramo">
+            <path class="limb" stroke-width="1.7" d="M340 300 C340 240 366 158 378 74"/>
+            <path class="ramo__hit" d="M340 300 C340 240 366 158 378 74"/>
+            <rect class="node-bg" x="298" y="48" width="160" height="28" rx="8"/>
+            <text class="node-tx" x="378" y="67" text-anchor="middle">machine learning</text>
+          </g>
+          <g class="ramo">
+            <path class="limb" stroke-width="1.7" d="M340 282 C400 264 462 192 492 100"/>
+            <path class="ramo__hit" d="M340 282 C400 264 462 192 492 100"/>
+            <rect class="node-bg" x="451" y="86" width="82" height="28" rx="8"/>
+            <text class="node-tx" x="492" y="105" text-anchor="middle">ml flow</text>
+          </g>
+          <g class="ramo">
+            <path class="limb" stroke-width="1.7" d="M340 260 C430 252 540 222 588 160"/>
+            <path class="ramo__hit" d="M340 260 C430 252 540 222 588 160"/>
+            <rect class="node-bg" x="547" y="146" width="82" height="28" rx="8"/>
+            <text class="node-tx" x="588" y="165" text-anchor="middle">capital</text>
+          </g>
+          <g class="ramo">
+            <path class="limb" stroke-width="1.7" d="M340 240 C450 238 578 240 620 240"/>
+            <path class="ramo__hit" d="M340 240 C450 238 578 240 620 240"/>
+            <rect class="node-bg" x="545" y="226" width="134" height="28" rx="8"/>
+            <text class="node-tx" x="612" y="245" text-anchor="middle">econométricos</text>
+          </g>
         </g>
 
         <path d="M60 412 H620" stroke="var(--line-2)" stroke-width="1" stroke-dasharray="3 7"/>

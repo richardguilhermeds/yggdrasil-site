@@ -378,6 +378,43 @@ h1, h2, h3, .display {
     margin-right: calc(var(--bleed) * -1);
   }
 }
+/* ---------- árvore interativa ----------
+   `--mx`/`--my` vão de -0.5 a 0.5 e são escritos pelo JS conforme o ponteiro
+   anda pelo hero. A árvore inteira inclina, e cada camada se desloca um pouco
+   diferente para dar profundidade: a copa mais, as raízes ao contrário. */
+.tree {
+  --mx: 0; --my: 0;
+  transform: perspective(1000px)
+             rotateY(calc(var(--mx) * 6deg))
+             rotateX(calc(var(--my) * -4deg));
+  transition: transform 0.45s var(--ease);
+  will-change: transform;
+}
+.tree .ramos { transform: translate(calc(var(--mx) * 16px), calc(var(--my) * 11px)); transition: transform 0.5s var(--ease); }
+.tree .halo  { transform: translate(calc(var(--mx) * 24px), calc(var(--my) * 16px)); transition: transform 0.65s var(--ease); }
+.tree .root  { transform: translate(calc(var(--mx) * -7px), calc(var(--my) * -5px)); transition: transform 0.5s var(--ease); }
+
+/* trilha invisível e grossa: o galho tem 1,7px de traço e seria impossível
+   de acertar com o mouse sem isto */
+.ramo__hit { stroke: transparent; stroke-width: 26; fill: none; pointer-events: stroke; cursor: pointer; }
+.ramo { transition: opacity 0.25s var(--ease); }
+.ramo .limb, .ramo .node-bg, .ramo .node-tx {
+  transition: stroke 0.25s var(--ease), fill 0.25s var(--ease),
+              opacity 0.25s var(--ease), stroke-width 0.25s var(--ease);
+}
+/* apontar um ramo faz os outros recuarem, isolando o módulo */
+.ramos:hover .ramo { opacity: 0.32; }
+.ramos .ramo:hover { opacity: 1; }
+.ramo:hover .limb    { stroke: var(--accent-2); opacity: 1; stroke-width: 2.8; }
+.ramo:hover .node-bg { fill: var(--accent-dim); stroke: var(--accent); }
+.ramo:hover .node-tx { fill: var(--accent-2); }
+
+/* sem inclinação em touch nem para quem pediu menos movimento; o realce por
+   ramo continua valendo nos dois casos */
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .tree, .tree .ramos, .tree .halo, .tree .root { transform: none; transition: none; }
+}
+
 .tree .limb { stroke: currentColor; fill: none; stroke-linecap: round; opacity: 0.55; }
 .tree .root { stroke: var(--ink-mute); fill: none; stroke-linecap: round; opacity: 0.75; }
 .tree .leaf { fill: var(--accent); }
