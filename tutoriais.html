@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tutoriais · Yggdrasil Project</title>
-<meta name="description" content="Doze notebooks passo a passo do Yggdrasil Project: esteira de ML, EDA, seleção em PySpark, segmentadores, capital econômico e modelos econométricos satélite.">
+<meta name="description" content="Doze notebooks passo a passo do Yggdrasil Project: esteira de ML, EDA, triagem e seleção de variáveis, segmentadores, capital econômico e modelos econométricos satélite.">
 <meta name="theme-color" content="#08080a">
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
@@ -112,17 +112,21 @@
       <h2 id="trilha-2">2 · Features: da exploração à seleção</h2>
       <p>
         Antes de qualquer modelo, entender e podar o conjunto de variáveis. O <b>02</b> perfila cada
-        feature e emite um veredito; o <b>03</b> leva a seleção para PySpark, por book; o <b>10</b>
-        formaliza tudo isso como uma esteira de etapas plugáveis com relatório e política.
+        feature e emite um veredito. Depois vêm <b>dois estágios em sequência</b>, que é onde as
+        pessoas costumam se confundir: o <b>03</b> é a peneira do <b>universo</b> — centenas de
+        colunas agrupadas por book, com Boruta e consenso, devolvendo uma <i>shortlist</i>; o
+        <b>10</b> pega essa lista já curta e aplica a <b>régua do modelo</b> dentro do segmentador,
+        com PSI, monotonia e VIF, produzindo a política em JSON e o relatório do comitê.
+        Um corta o universo; o outro documenta a régua final.
       </p>
 
       <div class="tuts" style="margin-top:24px">
         <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/02_tutorial_eda_features.ipynb" target="_blank" rel="noopener">
           <span class="tut__no">02</span><span><b class="tut__t">EDA de features</b><span class="tut__d">Missing global e por safra, percentis no tempo, WoE/IV, PSI por feature, VIF, leakage e <code>feature_profile</code> com veredito.</span></span></a>
         <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/03_tutorial_feature_selection.ipynb" target="_blank" rel="noopener">
-          <span class="tut__no">03</span><span><b class="tut__t">Seleção de features (PySpark)</b><span class="tut__d">Funil por book: missing, variância, importância RF com IV/KS/AUC, redundância, Boruta e consenso.</span></span></a>
+          <span class="tut__no">03</span><span><b class="tut__t">Triagem de features por book</b><span class="tut__d">Antes do modelo: funil por book com missing, variância, importância RF com IV/KS/AUC, redundância, Boruta e consenso. Roda em <code>pandas</code> <b>ou</b> Spark — o backend vem do tipo do DataFrame.</span></span></a>
         <a class="card tut" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/10_tutorial_selecao_variaveis.ipynb" target="_blank" rel="noopener">
-          <span class="tut__no">10</span><span><b class="tut__t">Esteira de seleção de variáveis</b><span class="tut__d">Etapas plugáveis, visualização do funil, relatório consolidado e política de seleção.</span></span></a>
+          <span class="tut__no">10</span><span><b class="tut__t">Esteira de seleção de variáveis</b><span class="tut__d">A régua do modelo sobre a lista já curta: etapas plugáveis (categóricas, IV, PSI, monotonia, correlação, VIF), funil, relatório consolidado e política em JSON.</span></span></a>
       </div>
 
       <h2 id="trilha-3">3 · Segmentadores e a esteira governada</h2>
@@ -165,7 +169,7 @@
         <li>Rode a partir da <b>raiz do repositório</b>. O layout é <i>flat</i> e <code>import yggdrasil</code> funciona sem instalar.</li>
         <li>Localmente, o MLflow 3.x precisa de <code>MLFLOW_ALLOW_FILE_STORE=true</code> para usar <code>./mlruns</code>. Os notebooks já definem isso.</li>
         <li>Para as UIs interativas, instale o extra <code>[ui]</code>. Sem <code>anywidget</code>, o preview da árvore cai para PNG estático.</li>
-        <li>Os tutoriais <b>03</b> (PySpark) e <b>09</b>/<b>11</b> (satélites) exigem os extras <code>[spark]</code> e <code>[econometric]</code>.</li>
+        <li>Os tutoriais <b>09</b> e <b>11</b> (satélites) exigem o extra <code>[econometric]</code>. O <b>03</b> roda sem nada além do pacote se você passar um <code>DataFrame</code> pandas; o extra <code>[spark]</code> só é necessário para a versão distribuída, que é a que o notebook demonstra.</li>
       </ul>
 
       <div class="hero__actions" style="margin-top:26px">

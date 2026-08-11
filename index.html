@@ -10,7 +10,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Yggdrasil Project">
-<meta property="og:description" content="Sete módulos isolados para o ciclo do crédito: esteira de ML governada, EDA, seleção em PySpark, segmentadores, capital econômico e econométricos satélite.">
+<meta property="og:description" content="Sete módulos isolados para o ciclo do crédito: esteira de ML governada, EDA, triagem de features em pandas ou Spark, segmentadores, capital econômico e econométricos satélite.">
 <meta property="og:image" content="https://yggdrasil-project.com.br/assets/img/g1-arvore.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -382,11 +382,14 @@
       <article class="card mod reveal">
         <div class="mod__txt">
           <span class="mod__no">RAMO 03</span>
-          <h3 class="h-card">Seleção de features em PySpark</h3>
+          <h3 class="h-card">Triagem de features por book</h3>
           <p>
-            Seleção por <b>book</b> (grupo de features por prefixo ou palavra-chave) sobre um Spark
-            DataFrame. O funil vai de missing e variância a importância, redundância (Pearson e
-            Spearman), Boruta <i>Spark-native</i> e consenso, com backend <code>"spark"</code> ou <code>"driver"</code>.
+            <code>run_feature_selection</code> peneira o <b>universo</b> de features agrupadas por
+            <b>book</b> (grupo por prefixo ou palavra-chave): missing e variância, importância
+            (RandomForest e univariadas), redundância (Pearson e Spearman), Boruta e consenso. Entrega
+            shortlist por book, ranking global e auditoria de leakage, antes de escolher o modelo.
+            Aceita <b>pandas ou Spark</b> — o backend sai do tipo do DataFrame, sem flag, e a chamada e
+            o relatório são idênticos; só os percentis mudam, exatos no pandas e aproximados no Spark.
           </p>
           <div class="mod__api"><code>book</code><code>boruta</code><code>consenso</code><code>ranking global</code></div>
         </div>
@@ -684,6 +687,9 @@
     <p class="lede reveal">
       Todos em <code>notebooks/tutoriais/</code>, prontos para Jupyter e Databricks, com dados
       sintéticos embutidos. Se for a sua primeira vez, o <b>00</b> dá a visão geral em uma sentada.
+      O <b>03</b> e o <b>10</b> são estágios em sequência, não duplicatas: o 03 corta o universo de
+      features numa shortlist por book, o 10 documenta a régua final sobre a lista já curta, dentro
+      do segmentador.
     </p>
 
     <div class="tuts">
@@ -694,7 +700,7 @@
       <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/02_tutorial_eda_features.ipynb" target="_blank" rel="noopener">
         <span class="tut__no">02</span><span><b class="tut__t">EDA de features</b><span class="tut__d">Do missing por safra ao veredito automático.</span></span></a>
       <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/03_tutorial_feature_selection.ipynb" target="_blank" rel="noopener">
-        <span class="tut__no">03</span><span><b class="tut__t">Seleção em PySpark</b><span class="tut__d">Funil por book, Boruta e ranking global.</span></span></a>
+        <span class="tut__no">03</span><span><b class="tut__t">Triagem de features por book</b><span class="tut__d">Funil, Boruta e ranking global, em pandas ou Spark.</span></span></a>
       <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/04_tutorial_tree_segmenter.ipynb" target="_blank" rel="noopener">
         <span class="tut__no">04</span><span><b class="tut__t">Árvore de segmentação</b><span class="tut__d">Classificação e regressão pelo mesmo <code>task_type</code>.</span></span></a>
       <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/05_tutorial_instalacao_e_interfaces.ipynb" target="_blank" rel="noopener">
@@ -708,7 +714,7 @@
       <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/09_tutorial_modelos_econometricos.ipynb" target="_blank" rel="noopener">
         <span class="tut__no">09</span><span><b class="tut__t">Econométricos satélite</b><span class="tut__d">ARDL, fator Z e projeção por cenários.</span></span></a>
       <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/10_tutorial_selecao_variaveis.ipynb" target="_blank" rel="noopener">
-        <span class="tut__no">10</span><span><b class="tut__t">Esteira de seleção</b><span class="tut__d">Etapas plugáveis, funil, relatório e política.</span></span></a>
+        <span class="tut__no">10</span><span><b class="tut__t">Esteira de seleção</b><span class="tut__d">A régua final do modelo: etapas plugáveis, relatório e política.</span></span></a>
       <a class="card tut reveal" href="https://github.com/richardguilhermeds/Yggdrasil-Project/blob/main/notebooks/tutoriais/11_tutorial_interface_series_temporais.ipynb" target="_blank" rel="noopener">
         <span class="tut__no">11</span><span><b class="tut__t">Interface de séries temporais</b><span class="tut__d">SatelliteUI: da estacionariedade ao backtest.</span></span></a>
     </div>
@@ -812,7 +818,7 @@ res.reports             <span class="c"># relatório por grupo homogêneo</span>
           <tr><th>extra</th><th>para quê</th></tr>
           <tr><td><code>[dev]</code></td><td>núcleo mais pytest, jupyter e nbconvert</td></tr>
           <tr><td><code>[ui]</code></td><td>UIs interativas (ipywidgets, anywidget)</td></tr>
-          <tr><td><code>[spark]</code></td><td>régua em PySpark fora do Databricks</td></tr>
+          <tr><td><code>[spark]</code></td><td>backend Spark da triagem de features fora do Databricks (em pandas, dispensável)</td></tr>
           <tr><td><code>[econometric]</code></td><td>satélites: statsmodels e arch</td></tr>
           <tr><td><code>[catboost]</code></td><td>CatBoost (LightGBM e XGBoost já no core)</td></tr>
           <tr><td><code>[pycaret]</code></td><td>treino automatizado via PyCaret</td></tr>
