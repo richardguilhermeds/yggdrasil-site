@@ -74,6 +74,43 @@
     }
   });
 
+  /* ---------------- estrelas do GitHub ----------------
+     Os contadores nascem com `hidden` e só aparecem se a API responder: sem
+     rede, offline ou estourando o rate limit (60 req/h por IP, sem token), a
+     página simplesmente não mostra o número em vez de exibir um placeholder. */
+
+  var starHosts = document.querySelectorAll("[data-stars-host]");
+  if (starHosts.length) {
+    var SKEY = "ygg-gh-stars";
+    var STTL = 3600000;   // 1 h de cache por sessão, para não repetir a chamada a cada página
+
+    var paintStars = function (n) {
+      starHosts.forEach(function (host) {
+        var slot = host.querySelector("[data-stars]");
+        if (slot) slot.textContent = String(n);
+        host.removeAttribute("hidden");
+      });
+    };
+
+    var cached = null;
+    try { cached = JSON.parse(sessionStorage.getItem(SKEY) || "null"); } catch (e) { /* modo privado */ }
+
+    if (cached && typeof cached.n === "number" && Date.now() - cached.t < STTL) {
+      paintStars(cached.n);
+    } else if (window.fetch) {
+      fetch("https://api.github.com/repos/richardguilhermeds/Yggdrasil-Project")
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+        .then(function (d) {
+          if (typeof d.stargazers_count !== "number") return;
+          paintStars(d.stargazers_count);
+          try {
+            sessionStorage.setItem(SKEY, JSON.stringify({ n: d.stargazers_count, t: Date.now() }));
+          } catch (e) { /* modo privado */ }
+        })
+        .catch(function () { /* contadores seguem ocultos */ });
+    }
+  }
+
   /* ---------------- revelação ao rolar ---------------- */
 
   var targets = document.querySelectorAll(".reveal");

@@ -245,14 +245,31 @@ h1, h2, h3, .display {
 
 .nav__links { display: flex; align-items: center; gap: 2px; }
 .nav__links a {
-  padding: 7px 11px; border-radius: 7px; text-decoration: none;
+  padding: 7px 10px; border-radius: 7px; text-decoration: none;
   font-family: "JetBrains Mono", monospace; font-size: 11.5px;
-  letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-dim);
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim);
+  /* sem isto a seta ↗ quebra para a linha de baixo e desalinha a barra toda */
+  white-space: nowrap;
   transition: color 0.2s, background 0.2s;
 }
 .nav__links a:hover { color: var(--ink); background: var(--hatch); }
 
-.nav__cta { display: flex; align-items: center; gap: 8px; margin-left: 10px; }
+.nav__cta { display: flex; align-items: center; gap: 7px; margin-left: 10px; flex: none; }
+
+/* botões de ícone (GitHub, PyPI) alinhados com o CTA */
+.iconbtn {
+  display: inline-flex; align-items: center; gap: 6px; flex: none;
+  height: 34px; padding: 0 10px; border-radius: 8px;
+  border: 1px solid var(--line-2); background: transparent; color: var(--ink-dim);
+  text-decoration: none; white-space: nowrap;
+  transition: all 0.22s var(--ease);
+}
+.iconbtn:hover { border-color: var(--accent); color: var(--accent); }
+.iconbtn svg { width: 15px; height: 15px; flex: none; }
+.iconbtn .n {
+  font-family: "JetBrains Mono", monospace; font-size: 11.5px; letter-spacing: 0.03em;
+}
+.iconbtn .star { color: var(--accent); }
 
 .nav__burger {
   display: none; width: 38px; height: 34px; border-radius: 8px;
@@ -260,7 +277,9 @@ h1, h2, h3, .display {
   cursor: pointer; align-items: center; justify-content: center;
 }
 
-@media (max-width: 940px) {
+/* 7 links de seção + brand + CTA não cabem abaixo de ~1060px: abaixo disso a
+   barra vira menu, senão os itens quebram de linha e a nav perde o alinhamento */
+@media (max-width: 1060px) {
   .nav__links {
     position: absolute; inset: 62px 0 auto; flex-direction: column; align-items: stretch;
     gap: 0; padding: 10px var(--gutter) 18px;
@@ -270,7 +289,9 @@ h1, h2, h3, .display {
   .nav__links.is-open { display: flex; }
   .nav__links a { padding: 12px 4px; font-size: 13px; border-bottom: 1px solid var(--line); }
   .nav__burger { display: inline-flex; }
-  .nav__cta .btn:not(.btn--solid) { display: none; }
+}
+@media (max-width: 560px) {
+  .nav__cta .iconbtn--pypi { display: none; }   /* o link do PyPI continua no rodapé */
 }
 
 /* ============================ hero ======================================== */
@@ -291,26 +312,10 @@ h1, h2, h3, .display {
 }
 .hero > * { position: relative; z-index: 1; }
 
-/* pill de repositório, acima do título */
-.hero__repo {
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 6px 8px 6px 12px; border-radius: 999px;
-  border: 1px solid var(--line-2); background: var(--card);
-  text-decoration: none; color: var(--ink-dim);
-  font-family: "JetBrains Mono", monospace; font-size: 11.5px; letter-spacing: 0.04em;
-  transition: all 0.22s var(--ease);
-}
-.hero__repo:hover { border-color: var(--accent); color: var(--ink); }
-.hero__repo svg { width: 15px; height: 15px; flex: none; }
-.hero__repo .go {
-  padding: 2px 8px; border-radius: 999px; background: var(--accent-dim); color: var(--accent);
-  font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
-}
-
 .hero__title {
   font-size: clamp(62px, 15.5vw, 208px);
   letter-spacing: -0.045em; line-height: 0.84;
-  margin: 16px 0 0;
+  margin: 14px 0 0;
 }
 .hero__kenning {
   font-family: "JetBrains Mono", monospace; font-size: clamp(10px, 1.4vw, 13px);
