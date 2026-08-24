@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Yggdrasil Project · a árvore-mundo da ciência de dados de crédito</title>
+<title>Yggdrasil Project · a árvore-mundo da ciência de dados &amp; crédito</title>
 <meta name="description" content="Esteiras governadas de machine learning, EDA, seleção de variáveis, segmentação, capital econômico e modelos econométricos satélite para risco de crédito. Pandas e Spark, roda local e no Databricks.">
 <meta name="theme-color" content="#08080a">
 <link rel="canonical" href="https://yggdrasil-project.com.br/">
@@ -77,7 +77,7 @@
 
     <!-- título em largura cheia: dentro da coluna de texto ele estourava por
          cima da árvore, porque 208px de Anton não cabem em meia página -->
-    <p class="eyebrow"><span class="rune" aria-hidden="true">ᛦ</span> A árvore-mundo · ciência de dados de crédito</p>
+    <p class="eyebrow"><span class="rune" aria-hidden="true">ᛦ</span> A árvore-mundo · ciência de dados &amp; crédito</p>
     <h1 class="hero__title">Yggdra<span>sil</span></h1>
     <span class="hero__kenning">estatística · machine learning · tutoriais</span>
 
@@ -87,7 +87,7 @@
       <p class="hero__lede">
         Uma biblioteca Python de <strong>sete conceitos principais</strong> para o ciclo completo do
         crédito, da concessão à recuperação e do escore ao capital. O núcleo é
-        <strong>pandas e spark</strong>: roda no seu notebook e no Databricks, com ou sem
+        <strong>pandas e spark</strong>: roda no seu notebook e no Databricks, com apenas um
         <code>pip install</code>.
       </p>
 
@@ -231,7 +231,7 @@
 <section class="section" id="raizes">
   <div class="wrap">
     <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᚢ</span> As três raízes</p>
-    <h2 class="h-sec reveal">De onde a árvore bebe</h2>
+    <h2 class="h-sec reveal">O que alimenta a árvore</h2>
     <p class="lede reveal">
       Na cosmologia nórdica, três fontes sagradas alimentam Yggdrasil. Aqui elas viram os três
       alicerces do repositório, cada um apoiando o outro, todos no mesmo lugar.
@@ -264,8 +264,8 @@
 
       <article class="card root-card reveal" data-rune="ᚻ">
         <span class="root-card__well">Hvergelmir · de onde brotam os rios</span>
-        <h3 class="h-card">Tutoriais</h3>
-        <p>Onze notebooks passo a passo, prontos para Jupyter e Databricks. A lógica de produção nunca mora neles.</p>
+        <h3 class="h-card">Tutoriais de ciência de dados</h3>
+        <p>Notebooks com o passo a passo para Jupyter e Databricks. A lógica de produção nunca mora neles.</p>
         <ul>
           <li>Do zero à esteira completa</li>
           <li>UIs interativas ao vivo</li>
@@ -615,7 +615,7 @@
 <section class="section" id="galeria">
   <div class="wrap">
     <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᛊ</span> Galeria</p>
-    <h2 class="h-sec reveal">Seis saídas, quatro módulos</h2>
+    <h2 class="h-sec reveal">Principais módulos da biblioteca</h2>
     <p class="lede reveal">
       Nenhuma destas figuras foi desenhada à mão: todas saem dos métodos de plot da própria
       biblioteca. Clique para ampliar sem sair da página.
@@ -682,11 +682,11 @@
 <!-- ============================ TUTORIAIS ============================ -->
 <section class="section section--frame" id="tutoriais">
   <div class="wrap">
-    <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᚻ</span> Hvergelmir · doze nascentes</p>
+    <p class="eyebrow reveal"><span class="rune" aria-hidden="true">ᚻ</span> Hvergelmir · as nascentes</p>
     <h2 class="h-sec reveal">Comece por um notebook</h2>
     <p class="lede reveal">
       Todos em <code>notebooks/tutoriais/</code>, prontos para Jupyter e Databricks, com dados
-      sintéticos embutidos. Se for a sua primeira vez, o <b>00</b> dá a visão geral em uma sentada.
+      sintéticos embutidos. Se for a sua primeira vez, o <b>00</b> dá a visão geral.
       O <b>03</b> cobre a seleção inteira em duas partes: a triagem do universo de features, por book,
       e depois a régua final do modelo, dentro do segmentador.
     </p>
@@ -800,14 +800,23 @@ pip install -e <span class="k">".[dev]"</span>
 <span class="c"># uso mínimo</span>
 <span class="k">from</span> yggdrasil <span class="k">import</span> MLPipeline, ColumnConfig
 
-cfg  = ColumnConfig()   <span class="c"># feat_, dt_ref, amostra, target</span>
-pipe = MLPipeline(cfg, problem_type=<span class="k">"classification"</span>,
-                  ratings=[<span class="k">"decis"</span>, <span class="k">"quantil"</span>, <span class="k">"arvore"</span>, <span class="k">"optbin"</span>])
-res  = pipe.run(df, model=modelo, experiment=<span class="k">"/Shared/Yggdrasil/pd_pf"</span>)
+<span class="c"># feat_, dt_ref, amostra, target</span>
+cfg  = ColumnConfig()
+
+pipe = MLPipeline(
+    cfg,
+    problem_type=<span class="k">"classification"</span>,
+    ratings=[<span class="k">"decis"</span>, <span class="k">"quantil"</span>,
+             <span class="k">"arvore"</span>, <span class="k">"optbin"</span>],
+)
+res  = pipe.run(
+    df, model=modelo,
+    experiment=<span class="k">"/Shared/Yggdrasil/pd_pf"</span>,
+)
 
 res.metrics_by_sample   <span class="c"># métricas por DES/OOT</span>
 res.shifts              <span class="c"># shifts DES -&gt; OOT</span>
-res.reports             <span class="c"># relatório por grupo homogêneo</span></pre>
+res.reports             <span class="c"># por grupo homogêneo</span></pre>
       </div>
 
       <div class="card reveal" style="padding:6px 20px 12px">
@@ -837,7 +846,7 @@ res.reports             <span class="c"># relatório por grupo homogêneo</span>
 <!-- ============================ CTA ============================ -->
 <section class="section cta">
   <div class="wrap">
-    <p class="eyebrow reveal" style="justify-content:center"><span class="rune" aria-hidden="true">ᛦ</span> Ragnarök é opcional</p>
+    <p class="eyebrow reveal" style="justify-content:center"><span class="rune" aria-hidden="true">ᛦ</span> O Ragnarök agora acontece apenas para seus problemas</p>
     <h2 class="h-sec reveal">Regue a árvore</h2>
     <p class="lede reveal">
       Código aberto sob licença MIT. Issues, ideias e pull requests são bem-vindos: a árvore cresce
