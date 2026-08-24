@@ -7,6 +7,9 @@
   var DEFAULT_WORLD = "asgard";
   var root = document.documentElement;
 
+  // texto limpo de um nó que pode não existir
+  function textoDe(el) { return el ? el.textContent.trim() : ""; }
+
   /* ---------------- os Nove Mundos (temas) ---------------- */
 
   function applyWorld(id) {
@@ -141,6 +144,102 @@
         })
         .catch(function () { /* contadores seguem ocultos */ });
     }
+  }
+
+  /* ---------------- lightbox das figuras ----------------
+     Clicar numa figura amplia na própria página em vez de abrir outra aba.
+     Sem JS, ou num navegador sem <dialog>, o href da figura continua valendo e
+     a imagem abre normalmente; ctrl/cmd/shift + clique seguem abrindo em aba. */
+
+  var lb = document.querySelector("[data-lightbox]");
+
+  if (lb && typeof lb.showModal === "function") {
+    var lbImg   = lb.querySelector("[data-lb-img]");
+    var lbStage = lb.querySelector("[data-lb-stage]");
+    var lbNo    = lb.querySelector("[data-lb-no]");
+    var lbTit   = lb.querySelector("[data-lb-title]");
+    var lbSub   = lb.querySelector("[data-lb-sub]");
+    var lbHint  = lb.querySelector("[data-lb-hint]");
+
+    // preenche um slot com texto e o esconde quando não há o que mostrar
+    var preencher = function (el, texto) {
+      if (!el) return;
+      el.textContent = texto || "";
+      if (texto) el.removeAttribute("hidden");
+      else el.setAttribute("hidden", "");
+    };
+
+    // em toque não há Esc nem cursor, então a dica muda de verbo e de saída
+    var toque = !pontFino;
+    var VERBO = toque ? "toque" : "clique";
+    var SAIR = toque ? "toque fora para fechar" : "Esc para fechar";
+    var DICA_AMPLIAR = VERBO + " na imagem para o tamanho real · " + SAIR;
+    var DICA_AJUSTAR = VERBO + " de novo para ajustar à tela · " + SAIR;
+
+    /* rx/ry são o ponto clicado em fração da imagem (0 a 1): depois de ampliar,
+       a rolagem vai para lá, senão a pessoa amplia e perde a região que queria. */
+    var zoom = function (on, rx, ry) {
+      lb.classList.toggle("is-zoom", on);
+      if (lbHint) lbHint.textContent = on ? DICA_AJUSTAR : DICA_AMPLIAR;
+      if (!lbStage) return;
+      if (!on) { lbStage.scrollTop = 0; lbStage.scrollLeft = 0; return; }
+      var fx = typeof rx === "number" ? rx : 0.5;
+      var fy = typeof ry === "number" ? ry : 0.5;
+      lbStage.scrollLeft = fx * lbStage.scrollWidth - lbStage.clientWidth / 2;
+      lbStage.scrollTop = fy * lbStage.scrollHeight - lbStage.clientHeight / 2;
+    };
+
+    // numa tela larga o bastante a figura já cabe inteira: aí não há o que ampliar
+    var revisarGanho = function () {
+      var cabe = lbImg.naturalWidth && lbImg.clientWidth >= lbImg.naturalWidth - 1;
+      lb.classList.toggle("is-flat", !!cabe);
+    };
+    lbImg.addEventListener("load", revisarGanho);
+
+    var abrir = function (link) {
+      var img = link.querySelector("img");
+      var cap = link.querySelector(".cap");
+
+      lbImg.src = link.getAttribute("href");
+      lbImg.alt = img ? img.getAttribute("alt") || "" : "";
+
+      // legenda: a da galeria quando existe, senão o rótulo do mock do módulo
+      preencher(lbNo, textoDe(link.querySelector(".mod__no")));
+      preencher(lbTit, textoDe(cap) || textoDe(link.closest(".mock") &&
+                link.closest(".mock").querySelector(".mock__bar")) || "Figura");
+      preencher(lbSub, textoDe(link.querySelector(".sub")));
+
+      zoom(false);
+      root.classList.add("is-lb-open");
+      lb.showModal();
+      if (lbImg.complete) revisarGanho();
+    };
+
+    document.addEventListener("click", function (ev) {
+      var link = ev.target.closest("[data-zoom]");
+      if (!link) return;
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+      ev.preventDefault();
+      abrir(link);
+    });
+
+    lb.addEventListener("click", function (ev) {
+      if (ev.target.closest("[data-lb-close]")) { lb.close(); return; }
+      if (ev.target === lbImg) {
+        if (lb.classList.contains("is-flat")) return;
+        var r = lbImg.getBoundingClientRect();
+        zoom(!lb.classList.contains("is-zoom"),
+             (ev.clientX - r.left) / r.width, (ev.clientY - r.top) / r.height);
+        return;
+      }
+      // clique no vazio ao redor da figura fecha, como todo lightbox
+      if (!ev.target.closest(".lb__fig")) lb.close();
+    });
+
+    lb.addEventListener("close", function () {
+      zoom(false);
+      root.classList.remove("is-lb-open");
+    });
   }
 
   /* ---------------- revelação ao rolar ---------------- */

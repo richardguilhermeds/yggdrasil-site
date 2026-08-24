@@ -423,7 +423,7 @@
         </div>
         <div class="mock">
           <div class="mock__bar"><span class="dot" style="color:var(--accent)"></span> TreeSegmenterUI · régua de 6 folhas, monotônica em DES e OOT</div>
-          <a href="assets/img/arvore-interface.png" target="_blank" rel="noopener">
+          <a href="assets/img/arvore-interface.png" data-zoom>
             <img src="assets/img/arvore-interface.png" alt="Árvore de segmentação real construída na TreeSegmenterUI: raiz com toda a carteira, split por feat_atraso_max e depois por feat_util_lim, resultando em seis folhas coloridas pela inadimplência média, de 5,60% na folha 1 a 48,20% na folha 6." style="width:100%;background:#fff" loading="lazy">
           </a>
         </div>
@@ -443,7 +443,7 @@
         </div>
         <div class="mock">
           <div class="mock__bar"><span class="dot" style="color:var(--accent)"></span> beeswarm SHAP · lightgbm · AUC(OOT) 0,808</div>
-          <a href="assets/img/shap-beeswarm.png" target="_blank" rel="noopener">
+          <a href="assets/img/shap-beeswarm.png" data-zoom>
             <img src="assets/img/shap-beeswarm.png" alt="Beeswarm SHAP do modelo LightGBM: cada ponto é um contrato, a posição no eixo x é a contribuição da variável para o escore e a cor é o valor da variável. feat_util_lim alta empurra o risco para cima; feat_renda alta empurra para baixo." style="width:100%;background:#fff" loading="lazy">
           </a>
           <div class="mock__body" style="border-top:1px solid var(--line)">
@@ -618,12 +618,12 @@
     <h2 class="h-sec reveal">Seis saídas, quatro módulos</h2>
     <p class="lede reveal">
       Nenhuma destas figuras foi desenhada à mão: todas saem dos métodos de plot da própria
-      biblioteca. Clique para ver em tamanho cheio.
+      biblioteca. Clique para ampliar sem sair da página.
     </p>
 
     <div class="gallery">
-      <a class="card shot reveal" href="assets/img/g1-arvore.png" target="_blank" rel="noopener">
-        <img src="assets/img/g1-arvore.png" alt="Árvore de segmentação com seis folhas, coloridas pela inadimplência média." loading="lazy">
+      <a class="card shot reveal" href="assets/img/arvore-interface.png" data-zoom>
+        <img src="assets/img/arvore-interface.png" alt="Régua construída na TreeSegmenterUI: raiz com toda a carteira, split por feat_atraso_max e depois por feat_util_lim, resultando em seis folhas coloridas pela inadimplência média, de 5,60% na folha 1 a 48,20% na folha 6." loading="lazy">
         <figcaption>
           <span class="mod__no">SAÍDA 01 · TREE</span>
           <b class="cap">Árvore de segmentação</b>
@@ -631,7 +631,7 @@
         </figcaption>
       </a>
 
-      <a class="card shot reveal" href="assets/img/g2-notas.png" target="_blank" rel="noopener">
+      <a class="card shot reveal" href="assets/img/g2-notas.png" data-zoom>
         <img src="assets/img/g2-notas.png" alt="Taxa de default por folha em barras ordenadas, com intervalo de confiança de Wilson." loading="lazy">
         <figcaption>
           <span class="mod__no">SAÍDA 02 · TREE</span>
@@ -640,7 +640,7 @@
         </figcaption>
       </a>
 
-      <a class="card shot reveal" href="assets/img/g3-ks.png" target="_blank" rel="noopener">
+      <a class="card shot reveal" href="assets/img/g3-ks.png" data-zoom>
         <img src="assets/img/g3-ks.png" alt="Gráfico de KS com as distribuições acumuladas de bons e maus e a maior distância entre elas." loading="lazy">
         <figcaption>
           <span class="mod__no">SAÍDA 03 · TREE</span>
@@ -649,7 +649,7 @@
         </figcaption>
       </a>
 
-      <a class="card shot reveal" href="assets/img/shap-beeswarm.png" target="_blank" rel="noopener">
+      <a class="card shot reveal" href="assets/img/shap-beeswarm.png" data-zoom>
         <img src="assets/img/shap-beeswarm.png" alt="Beeswarm SHAP: um ponto por contrato, posição no eixo x é a contribuição da variável para o escore e a cor é o valor da variável." loading="lazy">
         <figcaption>
           <span class="mod__no">SAÍDA 04 · MODEL</span>
@@ -658,7 +658,7 @@
         </figcaption>
       </a>
 
-      <a class="card shot reveal" href="assets/img/g5-capital.png" target="_blank" rel="noopener">
+      <a class="card shot reveal" href="assets/img/g5-capital.png" data-zoom>
         <img src="assets/img/g5-capital.png" alt="Distribuição de perdas da carteira com as zonas de provisão, capital econômico e cauda." loading="lazy">
         <figcaption>
           <span class="mod__no">SAÍDA 05 · CAPITAL</span>
@@ -667,7 +667,7 @@
         </figcaption>
       </a>
 
-      <a class="card shot reveal" href="assets/img/g6-satelite.png" target="_blank" rel="noopener">
+      <a class="card shot reveal" href="assets/img/g6-satelite.png" data-zoom>
         <img src="assets/img/g6-satelite.png" alt="Projeção da PD em leque, com cenários base, adverso e otimista e faixa de 90%." loading="lazy">
         <figcaption>
           <span class="mod__no">SAÍDA 06 · SATÉLITE</span>
@@ -903,6 +903,26 @@ res.reports             <span class="c"># relatório por grupo homogêneo</span>
     </div>
   </div>
 </footer>
+
+<!-- ============================ LIGHTBOX ============================ -->
+<!-- Só entra em cena com JS e <dialog>; sem isso o href da figura continua valendo. -->
+<dialog class="lb" data-lightbox aria-labelledby="lb-title">
+  <button class="lb__x" type="button" data-lb-close aria-label="Fechar (Esc)">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg>
+  </button>
+
+  <figure class="lb__fig">
+    <div class="lb__stage" data-lb-stage>
+      <img class="lb__img" data-lb-img alt="">
+    </div>
+    <figcaption class="lb__cap">
+      <span class="mod__no" data-lb-no hidden></span>
+      <b class="cap" id="lb-title" data-lb-title></b>
+      <span class="sub" data-lb-sub hidden></span>
+      <span class="lb__hint" data-lb-hint></span>
+    </figcaption>
+  </figure>
+</dialog>
 
 <script src="assets/js/site.js" defer></script>
 </body>

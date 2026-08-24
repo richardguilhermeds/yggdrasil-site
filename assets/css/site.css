@@ -598,6 +598,64 @@ h1, h2, h3, .display {
 .shot .cap { font-size: 13.5px; color: var(--ink); font-weight: 600; display: block; line-height: 1.35; }
 .shot .sub { font-size: 12px; color: var(--ink-mute); display: block; margin-top: 3px; line-height: 1.45; }
 
+/* ============================ lightbox ==================================== */
+
+/* Ampliação na própria página: <dialog> nativo, então Esc, foco preso e devolução
+   do foco ao card vêm de graça. Duas escalas: ajustada à tela e tamanho real. */
+.lb {
+  inset: 0; margin: 0; width: 100%; height: 100%;
+  max-width: 100%; max-height: 100%;
+  padding: clamp(14px, 3.5vw, 40px);
+  border: 0; background: transparent; color: var(--ink); overflow: hidden;
+}
+.lb[open] { display: grid; place-items: center; }
+.lb::backdrop { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(3px); }
+
+.lb__fig {
+  margin: 0; display: grid; gap: 12px; justify-items: center;
+  max-width: min(1400px, 100%); min-width: 0;
+}
+.lb__stage {
+  max-width: 100%; max-height: 76vh; overflow: auto; overscroll-behavior: contain;
+  border-radius: var(--radius); border: 1px solid var(--line-2); background: #fff;
+  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.8);
+}
+.lb__img {
+  display: block; max-width: 100%; max-height: 76vh;
+  margin-inline: auto; cursor: zoom-in;
+}
+/* tamanho real: a imagem estoura o palco e o palco vira área de rolagem */
+.lb.is-zoom .lb__img { max-width: none; max-height: none; cursor: zoom-out; }
+/* figura que já cabe inteira na tela: não há zoom a oferecer */
+.lb.is-flat .lb__img { cursor: default; }
+.lb.is-flat .lb__hint { visibility: hidden; }
+
+.lb__cap { display: grid; gap: 3px; text-align: center; max-width: 70ch; }
+.lb__cap .mod__no { font-size: 10.5px; }
+.lb__cap .cap { font-size: 14px; color: var(--ink); font-weight: 600; }
+.lb__cap .sub { font-size: 12.5px; color: var(--ink-dim); line-height: 1.45; }
+.lb__hint {
+  font-family: "JetBrains Mono", monospace; font-size: 10.5px;
+  letter-spacing: 0.09em; color: var(--ink-mute); margin-top: 4px;
+}
+
+.lb__x {
+  position: fixed; top: clamp(10px, 2vw, 20px); right: clamp(10px, 2vw, 22px);
+  display: grid; place-items: center; width: 38px; height: 38px;
+  border-radius: 10px; border: 1px solid var(--line-2);
+  background: var(--card); color: var(--ink-dim); cursor: pointer;
+  transition: border-color 0.22s var(--ease), color 0.22s var(--ease);
+}
+.lb__x:hover { border-color: var(--accent); color: var(--accent); }
+
+/* trava a rolagem do fundo enquanto a figura está aberta */
+html.is-lb-open, html.is-lb-open body { overflow: hidden; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lb[open] .lb__fig { animation: lb-in 0.24s var(--ease) both; }
+  @keyframes lb-in { from { opacity: 0; transform: scale(0.96); } }
+}
+
 /* ============================ demos em GIF ================================ */
 
 .demos { display: grid; gap: 16px; margin-top: 42px; }
