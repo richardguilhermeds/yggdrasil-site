@@ -36,9 +36,11 @@ de dados & risco de crédito". Cada série nova troca só a cor de acento.
 2. **Por Trás do Score** — como um modelo de crédito enxerga as pessoas: o que sobe
    e desce score, mito vs. mecânica, por que "consultar não baixa". Alcance enorme
    no Brasil + autoridade direta no seu nicho.
-3. **Glossário de Risco Ilustrado** — um termo por post com mini-diagrama: PD, LGD,
-   EAD, KS, Gini, PSI, safra/vintage, ECL, estágio 2, write-off. Conteúdo salvável,
-   autoridade 4.966/IFRS 9.
+3. **Glossário de Risco Ilustrado** *(série produzida — ver `glossario-risco/`)* —
+   um termo por post com mini-diagrama: PD, LGD, EAD, KS, Gini, PSI, safra/vintage,
+   ECL, estágio 2, write-off. Conteúdo salvável, autoridade 4.966/IFRS 9.
+   Acento da série: verde-lima `#BEF264`. Próximos verbetes sugeridos: EAD, ECL,
+   estágio 2, Gini, cura, write-off.
 4. **Estatística Sem Anestesia** — um mal-entendido clássico por post: p-valor,
    média×mediana, viés de sobrevivência, base rate, regressão à média.
 5. **Números do Brasil** — um dado público por post (BCB, IBGE, Serasa) com gráfico
@@ -68,14 +70,21 @@ distribuição ~6/2/1/1 a cada dez posts:
 Cadência realista: 1–2 por semana. Métrica que importa: mensagens e convites
 qualificados por mês — não curtida, não impressão.
 
-## Como gerar os posts (série Eixo Torto)
+## Como gerar os posts
 
 ```bash
 pip install matplotlib pillow python-pptx fonttools numpy
+
+# série Eixo Torto
 cd social/eixo-torto
-python3 make_charts.py <dir_fontes> charts    # gráficos 2x + marca
-python3 make_pptx.py <dir_fontes> charts pptx # 6 posts .pptx 1080×1350
+python3 make_charts.py <dir_fontes> charts           # gráficos 2x + marca
+python3 make_pptx.py <dir_fontes> charts pptx        # 6 posts .pptx 1080×1350
 python3 make_preview.py <dir_fontes> charts preview  # prévias .png
+
+# série Glossário de Risco
+cd social/glossario-risco
+python3 make_charts.py <dir_fontes> charts           # diagramas 2x + marca ≔
+python3 make_posts.py <dir_fontes> charts pptx preview
 ```
 
 Fontes: Archivo Black e Space Grotesk (Google Fonts). Os `.pptx` importam no
